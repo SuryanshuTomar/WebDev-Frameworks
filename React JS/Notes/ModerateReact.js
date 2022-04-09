@@ -1,4 +1,5 @@
-// =>  What is an "Effect" (or a "Side Effect") ?
+// =>  WHAT IS AN "EFFECT" (OR A "SIDE EFFECT") ?
+
 // - We know that React app as a whole and also especially the React library itself has one main job to render the UI, to React to our user input, to re-render the UI when it's needed.
 // - Therefore, the main job of React the application  is to Evaluate and Render the JSX code and the DOM. We want to manage the State and Props to make sure that every component has the data it needs and that we reflect the user input correctly. And We wanna React to user events as mentioned and of course React is there to also re-evaluate our components and their JSX code and manipulate the real Dom as needed.
 // - This is all baked into React with the tools and features we learned this far and which we will dive into throughout this course of course. So something like to useState Hook, props and so on.
@@ -13,6 +14,8 @@
 // - The useEffect()Hook is called with two arguments with two parameters.
 // - The first argument is a function that should be executed after every component evaluation if the specified dependencies changed. And the specified dependencies are the second argument that you pass in. That's an array full of dependencies and you will see how these dependencies look like throughout this module.
 // - So an array full of dependencies and whenever such a dependency changes that first function will re-run. And therefore in that first function you can put any side effect code and that code will then only execute when the dependencies specified by you changed and not when the component re-renders but only when your dependencies changed.
+
+// => UseEffect() Syntax -
 
 // => What should not be added as dependencies to useEffect Hook ?
 // - There are a few exceptions you should be aware of:
@@ -45,3 +48,51 @@
 // - "setTimerIsActive" is NOT added as a dependency because it's that exception: State updating functions could be added but don't have to be added since React guarantees that the functions themselves never change.
 // - "myTimer" is NOT added as a dependency because it's not a component-internal variable (i.e. not some state or a prop value) - it's defined outside of the component and changing it (no matter where) wouldn't cause the component to be re-evaluated.
 // - "setTimeout" is NOT added as a dependency because it's a built-in API (built-into the browser) - it's independent from React and your components, it doesn't change
+
+// NOTE:
+// const { someProperty } = someObject;
+// useEffect(() => {
+//   // code that only uses someProperty ...
+// }, [someProperty]);
+
+// - This is a very common pattern and approach, which is why I typically use it and why I show it here (I will keep on using it throughout the course).
+// I just want to point out, that the key thing is NOT that we use destructuring but that we pass specific properties instead of the entire object as a dependency.
+
+// - We could also write this code and it would work in the same way -
+// useEffect(() => {
+//   // code that only uses someProperty ...
+// }, [someObject.someProperty]);
+// - This works just fine as well!
+
+// - But you should avoid this code:
+// useEffect(() => {
+//   // code that only uses someProperty ...
+// }, [someObject]);
+
+// - Why?
+// - Because now the effect function would re-run whenever ANY property of someObject changes - not just the one property (someProperty in the above example) our effect might depend on.
+
+// --------------------------------------------------------------------------------------------------------
+// => useReducer() HOOK FOR STATE MANAGEMENT -
+
+// - useReducer() is another built in Hook and it will help us with state management. So it's a bit like useState, but actually with more capabilities and especially useful for more complex state.
+// - Because sometimes you have more complex state, for example, multiple States that kind of belong together, that are managing the same thing just different aspects of it. Or you have multiples states that kind of change together or are related.
+// - In such cases, useState and the state you get from there often becomes hard or error-prone to use and manage. And it's easy then to ride bad or inefficient or potentially buggy code, which is of course it's never what we want, useReducer is then an alternative to useState. So it's a replacement, if you need a more powerful state management.
+// - But its not necessary to use the useReducer() hook just because its more powerful than the useState() hook because useReducer() is also more complex to use than the useState() hook. There are some case where we have to manage multiple complex states where using the useReducer() hook might be worth it.
+// - If we want update a state, which depends on another state, then using the useReducer() hook would be a good idea to merge these states into a single state and then simply manage the merged state. So, when our state becomes more complex, bigger and combines multiple related states, it would be better to use useReducer() hook.
+
+// => UseReducer() Syntax -
+// const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn);
+// 1. state - The state snapshot used in the component  re-render/re-evalutation cycle.
+// 2. dispatchFn - This is a function that can be used to dispatch a new action(i.e. trigger an update of the state).
+// 3. reducerFn(prevState, action) => newState - A function that is triggered automatically once an action is dispatched(via dispatchFn()) - It recieves the latest state snapshot and should return the new, updated state.
+// 4. initialState - The Initial State
+// 5. initFn - This is a function that set the initial state programmatically.
+
+// => How useReducer() hook works ?
+// - useReducer just like useState, always returns an array with exactly two values. And therefore you can use array destructuring as we did it with useState to pull out these values and store them in separate constants.
+// - Now, the two values you are getting are- 1. the latest state snapshot, because it's state management mechanism is like useState. 2. a function that allows you to update that state snapshot. So that's kind of the same as for useState, though the state updating function will work differently.
+// - Instead of just setting a new state value, you will dispatch an action. And that action will be consumed by the first argument you pass to useReducer a so-called reducer function.
+// - So this is a function which gets the latest state snapshot automatically because this function will be called by React and it gets the action that was dispatched. Because React will call this reducer function whenever a new action is dispatched. So then it gets the last state snapshot managed by React. And that gets the action that was dispatched that triggered this reducer function execution.
+// - Now the reducer function then also should do one important thing. It should return a new updated state.
+// - In addition, you can also set some initial state and also an initial function that should run to set the initial state in case your initial state is a bit more complex. And for example, the result of let's say HTTP requests or anything like that.
