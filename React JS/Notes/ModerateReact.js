@@ -96,3 +96,25 @@
 // - So this is a function which gets the latest state snapshot automatically because this function will be called by React and it gets the action that was dispatched. Because React will call this reducer function whenever a new action is dispatched. So then it gets the last state snapshot managed by React. And that gets the action that was dispatched that triggered this reducer function execution.
 // - Now the reducer function then also should do one important thing. It should return a new updated state.
 // - In addition, you can also set some initial state and also an initial function that should run to set the initial state in case your initial state is a bit more complex. And for example, the result of let's say HTTP requests or anything like that.
+
+// -----------------------------------------------------------------------------------------------------------
+// => USESTATE VS USEREDUCER HOOK (FOR STATE MANAGEMENT) -
+
+// - Generally, we will come to know when to use useReducer. For example, when using the useState becomes too cumbersome, we find ourself dealing with a lot of kind of related state snapshots, which still are kind of independent and you start updating them together in a way that just doesn't work out. Then, we have to  use useReducer.
+
+// - When to use UseReducer() Hook and When to use UseState() -
+// 1. useState() -
+// - useState() is our main state management tool. Typically, we start with useState() for state management.
+// - It's great for independent pieces of state and data.
+// - It's great for simple state, you could say.
+// - It's great if state updates are easy and limited to a few kinds of updates.
+// - So, if we don't have a lot of different cases that will change a state and especially if you don't have, let's say, an object as a state or anything like that, then use useState().
+
+// 2. useReducer() -
+// - Now if we have an object as a state or a more complex state useReducer might be interesting because, in general, useReducer is great if we need more power and more power means that we can write such a reducer function that can contain more complex state updating logic where you always are guaranteed to work with the latest state snapshot. And where we can move that potentially more complex logic out of your component function body into a separate reducer function.
+// - We should especially consider useReducer, if you're dealing with related data with state that is made up of related pieces of state. For example, in form validation, we can use a single reducer function for validating the email and password and updating their values in the form instead of maintaining different states for validation and updating values for both password and email.
+// - In general, useReducer can be helpful if we have more complex state updates, if we have different cases, different actions that can change a state.
+
+// Note: 
+// - We can certainly also handle cases where useReducer would be good with just useState, especially when combining that with useEffect. But sometimes using useReducer just might be more elegant, or simpler.
+// -  We should also not always use the useReducer for state management as that would be overkill.
