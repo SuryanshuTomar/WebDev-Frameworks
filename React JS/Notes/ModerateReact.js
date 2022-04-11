@@ -115,6 +115,136 @@
 // - We should especially consider useReducer, if you're dealing with related data with state that is made up of related pieces of state. For example, in form validation, we can use a single reducer function for validating the email and password and updating their values in the form instead of maintaining different states for validation and updating values for both password and email.
 // - In general, useReducer can be helpful if we have more complex state updates, if we have different cases, different actions that can change a state.
 
-// Note: 
+// Note:
 // - We can certainly also handle cases where useReducer would be good with just useState, especially when combining that with useEffect. But sometimes using useReducer just might be more elegant, or simpler.
 // -  We should also not always use the useReducer for state management as that would be overkill.
+
+// ---------------------------------------------------------------------------------------------------------
+// => REACT CONTEXT -
+
+// A. React.createContext() -
+// const MyContext = React.createContext(defaultValue);
+// - Creates a Context object. When React renders a component that subscribes to this Context object it will read the current context value from the closest matching Provider above it in the tree.
+// - The defaultValue argument is only used when a component does not have a matching Provider above it in the tree. This default value can be helpful for testing components in isolation without wrapping them. Note: passing undefined as a Provider value does not cause consuming components to use defaultValue.
+
+// B. Context.Provider -
+// <MyContext.Provider value={/* some value */}>
+// - Every Context object comes with a Provider React component that allows consuming components to subscribe to context changes.
+// - The Provider component accepts a value prop to be passed to consuming components that are descendants of this Provider. One Provider can be connected to many consumers. Providers can be nested to override values deeper within the tree.
+// - All consumers that are descendants of a Provider will re-render whenever the Provider’s value prop changes. The propagation from Provider to its descendant consumers (including .contextType and useContext) is not subject to the shouldComponentUpdate method, so the consumer is updated even when an ancestor component skips an update.
+// - Changes are determined by comparing the new and old values using the same algorithm as Object.is.
+
+// Note -
+// - The way changes are determined can cause some issues when passing objects as value: see Caveats.
+
+// C. Class.contextType
+// class MyClass extends React.Component {
+//   componentDidMount() {
+//     let value = this.context;
+//     /* perform a side-effect at mount using the value of MyContext */
+//   }
+//   componentDidUpdate() {
+//     let value = this.context;
+//     /* ... */
+//   }
+//   componentWillUnmount() {
+//     let value = this.context;
+//     /* ... */
+//   }
+//   render() {
+//     let value = this.context;
+//     /* render something based on the value of MyContext */
+//   }
+// }
+
+// D. MyClass.contextType = MyContext; -
+// - The contextType property on a class can be assigned a Context object created by React.createContext(). Using this property lets you consume the nearest current value of that Context type using this.context. You can reference this in any of the lifecycle methods including the render function.
+
+// Note -
+// - You can only subscribe to a single context using this API. If you need to read more than one see Consuming Multiple Contexts.
+// - If you are using the experimental public class fields syntax, you can use a static class field to initialize your contextType.
+
+// class MyClass extends React.Component {
+//   static contextType = MyContext;
+//   render() {
+//     let value = this.context;
+//     /* render something based on the value */
+//   }
+// }
+
+// E. Context.Consumer -
+// <MyContext.Consumer>
+//   {value => /* render something based on the context value */}
+// </MyContext.Consumer>
+// - A React component that subscribes to context changes. Using this component lets you subscribe to a context within a function component.
+// - Requires a function as a child. The function receives the current context value and returns a React node. The value argument passed to the function will be equal to the value prop of the closest Provider for this context above in the tree. If there is no Provider for this context above, the value argument will be equal to the defaultValue that was passed to createContext().
+
+// Note -
+// - Context.Consumer is one way of consuming the React Context
+// - Another way of consuming the React Context is to use useContext() Hook. It is also more elegent way of consuming the React Context and recommended also.
+
+// F. Context.displayName -
+// - Context object accepts a displayName string property. React DevTools uses this string to determine what to display for the context.
+// - For example, the following component will appear as MyDisplayName in the DevTools:
+// const MyContext = React.createContext(/* some value */);
+// MyContext.displayName = 'MyDisplayName';
+// <MyContext.Provider> // "MyDisplayName.Provider" in DevTools
+// <MyContext.Consumer> // "MyDisplayName.Consumer" in DevTools
+
+// => Why to use React Context ?
+// - React context helps us avoid the problem of props drilling.
+// - Props drilling is a term to describe when you pass props down multiple levels to a nested component, through components that don't need it.
+// - Here is an example of props drilling. In this application, we have access to theme data that we want to pass as a prop to all of our app's components.
+// - As you can see, however, the direct children of App, such as Header, also have to pass the theme data down using props -
+
+// export default function App({ theme }) {
+//   return (
+//     <>
+//       <Header theme={theme} />
+//       <Main theme={theme} />
+//       <Sidebar theme={theme} />
+//       <Footer theme={theme} />
+//     </>
+//   );
+// }
+
+// function Header({ theme }) {
+//   return (
+//     <>
+//       <User theme={theme} />
+//       <Login theme={theme} />
+//       <Menu theme={theme} />
+//     </>
+//   );
+// }
+
+// - What is the issue with this example?
+// - The issue is that we are drilling the theme prop through multiple components that don't immediately need it.
+// - The Header component doesn't need theme other than to pass it down to its child component. In other words, it would be better for User , Login and Menu to consume the theme data directly.
+// - This is the benefit of React context – we can bypass using props entirely and therefore avoid the issue of props drilling.
+
+// => Full Explaination -
+// - https://www.freecodecamp.org/news/react-context-for-beginners/#what-is-the-usecontext-hook
+// - https://daveceddia.com/usecontext-hook/
+
+// 3. useContext() -
+// -  Another way of consuming context became available in React 16.8 with the arrival of React hooks. We can now consume context with the useContext hook.
+// - Instead of using render props, we can pass the entire context object to React.useContext() to consume context at the top of our component.
+
+// - Syntax - const value = useContext(MyContext);
+
+// - useContext() accepts a context object (the value returned from React.createContext) and returns the current context value for that context. The current context value is determined by the value prop of the nearest <MyContext.Provider> above the calling component in the tree.
+// - When the nearest <MyContext.Provider> above the component updates, this Hook will trigger a rerender with the latest context value passed to that MyContext provider. Even if an ancestor uses React.memo or shouldComponentUpdate, a rerender will still happen starting at the component itself using useContext.
+
+// - Don’t forget that the argument to useContext must be the context object itself:
+// - Correct: useContext(MyContext)
+// - Incorrect: useContext(MyContext.Consumer)
+// - Incorrect: useContext(MyContext.Provider)
+
+// - A component calling useContext will always re-render when the context value changes. If re-rendering the component is expensive, you can optimize it by using memoization.
+
+// - Tip -
+// - If you’re familiar with the context API before Hooks, useContext(MyContext) is equivalent to static contextType = MyContext in a class, or to <MyContext.Consumer>.
+// useContext(MyContext) only lets you read the context and subscribe to its changes. You still need a <MyContext.Provider> above in the tree to provide the value for this context.
+
+// -------------------------------------------------------------------------------------------------------------
