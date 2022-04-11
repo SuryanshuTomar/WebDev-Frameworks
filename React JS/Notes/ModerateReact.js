@@ -247,4 +247,13 @@
 // - If you’re familiar with the context API before Hooks, useContext(MyContext) is equivalent to static contextType = MyContext in a class, or to <MyContext.Consumer>.
 // useContext(MyContext) only lets you read the context and subscribe to its changes. You still need a <MyContext.Provider> above in the tree to provide the value for this context.
 
-// -------------------------------------------------------------------------------------------------------------
+// => Limitations of React Context -
+// 1.  Keep in mind that it can be great for app-wide or component-wide state. So essentially states that affects multiple components. It's not a replacement for component configuration.For example, in this application, if we use the same button component in the log in component to log the user in and triggered the form submission as well as we're using it in the home component to log the user out. So that is a scenario where using Context in the button component would be bad. In this case, it would be better if we use props to configure the button on what a button should do in a particular component.
+// 2. React Context is not optimized for high frequency changes. for example, if you have state changes every second or multiple times per second. But if we still want to use context for high frequency changes then we have to use Redux for that.
+// 3. React Context also shouldn't be used to replace all components communications and props.Props are still vital and important for component configuration.
+
+// Note:
+// 1. Use props for componenet configuration
+// 2. Use context for global state management.
+// 3. Use reducers for group state management.
+
