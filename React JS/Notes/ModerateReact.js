@@ -268,3 +268,5 @@
 // 2. Only call react hooks in react functions. That means in react component functions(functions that returns JSX in the end) or also allowed in custom hooks.
 // 3. Only call react hooks at the top level of your react component functions or your custom hook functions. Don't call hooks in nested functions. Don't call them in any block statements.
 // 4. Special Rule for useEffect() -  Make sure that you always add everything you refer to inside of use effect as a dependency unless there is a good reason not to do that.
+
+// => Make Refs, ForwardRefs, useImperativeHandle and Portals notes
