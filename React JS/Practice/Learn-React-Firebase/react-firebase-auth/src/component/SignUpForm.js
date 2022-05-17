@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase-config";
+import { AuthContext } from "../context/AuthContext";
 
-function SignUpForm({ setUser }) {
+function SignUpForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
+	const { dispatchUser } = useContext(AuthContext);
+
 	onAuthStateChanged(auth, (currenUser) => {
-		setUser(currenUser);
+		dispatchUser({ type: "USER", user: currenUser });
 	});
 
 	const register = async (email, password) => {

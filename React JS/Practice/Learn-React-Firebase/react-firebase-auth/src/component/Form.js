@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 
-function Form() {
-	const [loggedUser, setLoggedUser] = useState({});
+import { AuthContext } from "../context/AuthContext";
 
-	const loggeUserHandler = (user) => {
-		setLoggedUser(user);
-	};
+function Form() {
+	const { loggedUser } = useContext(AuthContext);
 
 	return (
 		<div>
 			<form>
-				<SignUpForm setUser={loggeUserHandler} />
-				<SignInForm loggedUser={loggedUser} setUser={loggeUserHandler} />
+				<SignUpForm />
+				<SignInForm />
 			</form>{" "}
 			<br />
 			<br />

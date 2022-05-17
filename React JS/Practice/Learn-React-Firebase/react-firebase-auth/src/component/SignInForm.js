@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
 	signInWithEmailAndPassword,
 	signOut,
 	onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase-config";
+import { AuthContext } from "../context/AuthContext";
 
-function SignInForm({ setUser, loggedUser }) {
+function SignInForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
+	const { dispatchUser, loggedUser } = useContext(AuthContext);
+
 	onAuthStateChanged(auth, (currenUser) => {
-		setUser(currenUser);
+		dispatchUser({ type: "USER", user: currenUser });
 	});
 
 	const login = async (email, password) => {
@@ -52,13 +55,14 @@ function SignInForm({ setUser, loggedUser }) {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
+				{"  "}
 				<input
 					type="submit"
 					value="Login User"
 					onClick={loginUserHandler}
 				/>
 			</div>
-			{"  "} <br />
+			<br />
 			{loggedUser && <button onClick={logout}>Sign Out</button>}
 		</div>
 	);

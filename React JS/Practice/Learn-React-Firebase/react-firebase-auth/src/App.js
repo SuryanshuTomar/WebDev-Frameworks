@@ -1,9 +1,12 @@
 import Form from "./component/Form";
+import AuthContextProvider from "./context/AuthContext";
 
 function App() {
 	return (
 		<div className="App">
-			<Form />
+			<AuthContextProvider>
+				<Form />
+			</AuthContextProvider>
 		</div>
 	);
 }
