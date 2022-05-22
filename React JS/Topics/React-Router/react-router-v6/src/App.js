@@ -1,5 +1,6 @@
+import React, { Component } from "react";
 import { Routes, Route } from "react-router-dom";
-import About from "./components/About";
+// import About from "./components/About";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import OrderSummary from "./components/OrderSummary";
@@ -11,6 +12,10 @@ import { Users } from "./components/Users";
 import { UserDetails } from "./components/UserDetails";
 import { Admin } from "./components/Admin";
 
+// This is a Dynamic Import
+// A promise is return by this dynamic import which is then converted into a module that contains a default exported React Component. In this case its About Component
+const LazyAbout = React.lazy(() => import("./components/About"));
+
 function App() {
 	return (
 		<div className="App">
@@ -18,7 +23,15 @@ function App() {
 			<Routes>
 				{/* Relative Routes */}
 				<Route path="/" element={<Home />} />
-				<Route path="/about" element={<About />} />
+				<Route
+					path="/about"
+					element={
+						// Using React Suspense to provide a fallback UI whenever the LazyAbout Component Starts Loading....
+						<React.Suspense fallback="Loading....">
+							<LazyAbout />
+						</React.Suspense>
+					}
+				/>
 				<Route path="/order-summary" element={<OrderSummary />} />
 
 				<Route path="products" element={<Products />}>

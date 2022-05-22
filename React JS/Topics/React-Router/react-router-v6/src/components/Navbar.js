@@ -22,7 +22,7 @@ function Navbar() {
 			<NavLink style={navLinkStyle} to="/products">
 				Products
 			</NavLink>
-			<NavLink stlye={navLinkStyle} to="/users">
+			<NavLink style={navLinkStyle} to="/users">
 				Users
 			</NavLink>
 		</nav>
