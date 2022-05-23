@@ -153,4 +153,12 @@
 // 	);
 // };
 
+// ---------------------------------------------------------------------------------------------
+// => CODE SPLITTING -
+
+// - Traditionally, all the components in a Reac Application would be bundled into one single called bundle.js
+// - This allows the browser to download the entire app once so that the use can navigate seamlessly without having the need to make another HTTP request to the server.
+// - But as the applciation grew in size and more third party package were installed, the bundled size bloated up causing the app to have a long initial load time.
+// - To Resolve this problem, A single bundle is split into smalelr ones and the user will only download the code that they need and this is what Code Splitting is.
+// - EG- With an analytics website, if a user wants to navigate to their profile page and then log off, there is no need to download the bulky code related to the dashboard page.
 
