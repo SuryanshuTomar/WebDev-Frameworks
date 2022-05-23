@@ -11,6 +11,10 @@ import { Featured } from "./components/Featured";
 import { Users } from "./components/Users";
 import { UserDetails } from "./components/UserDetails";
 import { Admin } from "./components/Admin";
+import { Profile } from "./components/Profile";
+import AuthContextProvider from "./components/Auth";
+import { Login } from "./components/Login";
+import { RequireAuth } from "./components/RequireAuth";
 
 // This is a Dynamic Import
 // A promise is return by this dynamic import which is then converted into a module that contains a default exported React Component. In this case its About Component
@@ -19,38 +23,52 @@ const LazyAbout = React.lazy(() => import("./components/About"));
 function App() {
 	return (
 		<div className="App">
-			<Navbar />
-			<Routes>
-				{/* Relative Routes */}
-				<Route path="/" element={<Home />} />
-				<Route
-					path="/about"
-					element={
-						// Using React Suspense to provide a fallback UI whenever the LazyAbout Component Starts Loading....
-						<React.Suspense fallback="Loading....">
-							<LazyAbout />
-						</React.Suspense>
-					}
-				/>
-				<Route path="/order-summary" element={<OrderSummary />} />
+			<AuthContextProvider>
+				<Navbar />
+				<Routes>
+					{/* Relative Routes */}
+					<Route path="/" element={<Home />} />
+					<Route
+						path="/about"
+						element={
+							// Using React Suspense to provide a fallback UI whenever the LazyAbout Component Starts Loading....
+							<React.Suspense fallback="Loading....">
+								<LazyAbout />
+							</React.Suspense>
+						}
+					/>
+					<Route path="/order-summary" element={<OrderSummary />} />
 
-				<Route path="products" element={<Products />}>
-					{/* Index Route */}
-					<Route index element={<Featured />} />
-					{/* Nested Routes */}
-					<Route path="new" element={<New />} />
-					<Route path="featured" element={<Featured />} />
-				</Route>
+					<Route path="products" element={<Products />}>
+						{/* Index Route */}
+						<Route index element={<Featured />} />
+						{/* Nested Routes */}
+						<Route path="new" element={<New />} />
+						<Route path="featured" element={<Featured />} />
+					</Route>
 
-				{/* Dynamic Routes */}
-				<Route path="users" element={<Users />}>
-					<Route path=":userId" element={<UserDetails />} />
-					<Route path="admin" element={<Admin />} />
-				</Route>
+					{/* Dynamic Routes */}
+					<Route path="users" element={<Users />}>
+						<Route path=":userId" element={<UserDetails />} />
+						<Route path="admin" element={<Admin />} />
+					</Route>
 
-				{/* Not Found */}
-				<Route path="*" element={<NotFound />} />
-			</Routes>
+					{/* Protected Routes */}
+
+					<Route
+						path="profile"
+						element={
+							<RequireAuth>
+								<Profile />
+							</RequireAuth>
+						}
+					></Route>
+					<Route path="login" element={<Login />} />
+
+					{/* Not Found */}
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</AuthContextProvider>
 		</div>
 	);
 }
