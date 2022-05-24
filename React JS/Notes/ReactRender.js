@@ -34,7 +34,9 @@
 // - Perfomance issues will occur it is mostly due to slow DOM updates. But React updates DOM efficiently, all updates in react are batched and updated at once. This helps reduce the performance issues incurred by updating the DOM multiple times in rapid successions.
 // - In React Docs, it is mentioned that - "The Commit Phase is usually very fast, but rendering can be slow"
 
+// ----------------------------------------------------------------------------------------------
 // 1. UseState Rendering -
+
 // - After the initial render, one of the ways to flag a component for re-render is by changing the component state. In class component, we can do it by this.setState() method and In function component, we can do it by calling the setter function of the state. And when we call these setter function, the setter function will flag the component as needing an update.
 // - During the render phase, React will go through the component tree and identify the flagged components.
 // - While identifying the flagged components, React requires that useState updates must pass in or returns a new value(in case of primitives) or reference(in case of objects) as a state value. If useState() does not pass any new value to the useState() function then react will simply bail out from the render phase for that component.
@@ -49,5 +51,15 @@
 // - If we change the state of a component to the value same as the current value of the state after the initial render, then the component will not re-render as the prevState and currentState is same.(But this happens only during the initial Render)
 // - A special case with the useState() hook and re-rendering is that, If we update a state hook to the same value as the current state, react may re-render the component one more time and then bail out from subsequent renders.
 
+// ----------------------------------------------------------------------------------------------
 // 2. UseReducer Rendering -
+
 // - UseReducer() Hook Rendering behaves similar to UseState() Hook Rendering. The only difference between the 2 is that the useState hook has setter function to change the state and flag the component for needing updates, useReducer has a dispatch function to flag the component for needing updates and dispatching the action to the reducer function which then takes decision according to the action dispatched to it and change the state accordingly.
+
+// ----------------------------------------------------------------------------------------------
+// 3. Rendering and State Immutability -
+
+// - When we use objects as state, the reference to the object must change for the flagged component in need for update by the state setter functions, Otherwise even if we change our state value in the same object, the reference to the object will not change and our updated state values will not qualify as changed state value and React will simply bail-out from render phase.
+// - To fix this issue, we have make a copy of the cuurent state object and make changes to the copied state object and then pass it to the setter function. By doing this we are passing the reference of the new copied object which will now have a different reference than the current state object and the setter function will recognize this state object new state value and will proceed with the reconciliation phase.
+// - Direcly Mutating the state is an easy way to create bugs in our application. So, make sure to not do that.
+// - The same concept will apply on all types of object in javascripts i.e.- arrays, functions, objects etcs
