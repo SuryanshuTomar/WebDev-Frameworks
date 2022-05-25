@@ -21,3 +21,10 @@
 // - Once the action has been dispatched, the reducer function then handles that action and updates the current state. And as soon as the state is updated, the newstate value will now be passed to our JS application because our app is subscribed to the store.
 
 
+// =>  Actions - 
+// - The only way our application can interact with the store.
+// - Carry some information from our app to the redux store.
+// - Plain JS Objects
+// - Have a "type" property that descibes something that happened in the application.
+// - The "type" property is typically defined as string contants.
+// - With Redux, we defines an actionCreater() function that simply creates an action and return that action.
