@@ -63,3 +63,19 @@
 // - To fix this issue, we have make a copy of the cuurent state object and make changes to the copied state object and then pass it to the setter function. By doing this we are passing the reference of the new copied object which will now have a different reference than the current state object and the setter function will recognize this state object new state value and will proceed with the reconciliation phase.
 // - Direcly Mutating the state is an easy way to create bugs in our application. So, make sure to not do that.
 // - The same concept will apply on all types of object in javascripts i.e.- arrays, functions, objects etcs
+
+// 3.  Rendering When Dealing with Parent and Child Component -
+
+// - The default behaviour for Parent and Child Component for Rendering is that, when a Parent Component Renders, react will recursively render all of its child components.
+
+// -> Case a -  When New State is different from the old state -
+// - In this case, same as the default behaviour, when a parent components state changes using a setter function which causes a parent component to re-render, the child component will also re-render.
+
+// -> Case b - When the New State is same as the Old State -
+//    -> Case b1 - Right after the initial render -
+//    - In this case, the parent component will bail-out of the render phase as we have already learned and if the parent component will not re-render then child component will also not re-render.
+//    -> Case b2 - After the re-renders (when the parent component has already been mounted) -
+//    - In this case, the parent component will render one more time to make sure if the New State is same the current State(old state) and if its the case then for further subsequent renders the parent component will not re-renders as we have already learned. So, In this case, the child component will not re-render at all.
+
+// Note:
+// - During the render phase, when react is converting the JSX code of the parent element to the React element, react check if it has any child component and if it has any, then react will proceed with the render phase of the child component also and conver the JSX of the child component to React element. Once, the JSX for both parent and child is converted to React element, React will diff the elements produced from the previous  render to the new render. And if React sees that only the parent component has changed while the child component is the same then react will only pass the changes of Parent component to the commit phase to be updated to the DOM and will drop the child component changes. Hence, even if the child component re-renders, the changes of the child component will never be commmited to the DOM if the child diff comes out to be the same as before.
