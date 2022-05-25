@@ -64,7 +64,8 @@
 // - Direcly Mutating the state is an easy way to create bugs in our application. So, make sure to not do that.
 // - The same concept will apply on all types of object in javascripts i.e.- arrays, functions, objects etcs
 
-// 3.  Rendering When Dealing with Parent and Child Component -
+// ----------------------------------------------------------------------------------------------
+// 4.  Rendering When Dealing with Parent and Child Component -
 
 // - The default behaviour for Parent and Child Component for Rendering is that, when a Parent Component Renders, react will recursively render all of its child components.
 
@@ -78,4 +79,4 @@
 //    - In this case, the parent component will render one more time to make sure if the New State is same the current State(old state) and if its the case then for further subsequent renders the parent component will not re-renders as we have already learned. So, In this case, the child component will not re-render at all.
 
 // Note:
-// - During the render phase, when react is converting the JSX code of the parent element to the React element, react check if it has any child component and if it has any, then react will proceed with the render phase of the child component also and conver the JSX of the child component to React element. Once, the JSX for both parent and child is converted to React element, React will diff the elements produced from the previous  render to the new render. And if React sees that only the parent component has changed while the child component is the same then react will only pass the changes of Parent component to the commit phase to be updated to the DOM and will drop the child component changes. Hence, even if the child component re-renders, the changes of the child component will never be commmited to the DOM if the child diff comes out to be the same as before.
+// - During the render phase, when react is converting the JSX code of the parent element to the React element, react check if it has any child component and if it has any, then react will proceed with the render phase of the child component also and conver the JSX of the child component to React element. Once, the JSX for both parent and child is converted to React element, React will diff the elements produced from the previous  render to the new render. And if React sees that only the parent component has changed while the child component is the same then react will only pass the changes of Parent component to the commit phase to be updated to the DOM and will drop the child component changes. Hence, even if the child component re-renders, the changes of the child component will never be commmited to the DOM if the child diff comes out to be the same as before. And this is called as Unnecessary Render.
