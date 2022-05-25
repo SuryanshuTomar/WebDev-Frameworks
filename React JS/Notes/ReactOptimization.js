@@ -44,6 +44,25 @@
 
 // Note: If a parent component is re-rendering because of props change in parent component or cause by the re-rendering of the GrandParent Component then the child component will also have to be re-rendered.
 
-// B. React Memo (Recommended Way)-
+// B. React Memo -
 // - To let know React to only re-render the child component only when the passed props changed and not to do the unnecessary re-renders, We can use React.Memo() which is Higher Order Component which we can use to wrap components if they render the same result given the same props. Doing this will give a performance boost by memoising the render output. So, if our component props don't change between the renders, React will skip rendering the component and will reuse the last rendered result.
 // - React.memo() performs a shallow comparison of the previous and new props and re-render the child component only if the props have changed.
+
+// - Question on Optimization -
+// Ques 1- When to use Same Elment Reference Technique and when to use React.memo() ?
+// Ans 1-
+// a. Same Elment Reference -
+// - We can use this when parent component re-renders because of the state change in the parent component which cause the child component to re-render.
+// - This technique does not work if the parent component re-renders because of changes in its props.
+// - When State Change - Yes
+// - When Props Change - No
+
+// b. React.memo() -
+// - We can use it when the child component is being asked to re-render due to changes in the parent's state which do not affect the child components props in anyway.
+// - React.memo() will still work if the child component does not have any props. But it is recommended to use Same Element Reference in this case.
+
+
+
+// Ques 2- If React.memo() provides the optimization by comparing the props, why not wrap every single component with React.memo() ? or Why doesn't React just internally memoize every component and not expose React.memo() to the developers? 
+// Ans 2- "Shallow comparisons aren't free. They are O(prop count). And they only buy somthing if it bails out. All Comparisons where we end up re-rendering are wasted. Why would you expect always comparing to be faster?. Considering many components always get different props."
+// - One more thing to note is that, When we optimize the rendering of one component, React will also skip rendering that component's entire subtree because it's effectively stopping the default "render children recursively" behavior of React.
