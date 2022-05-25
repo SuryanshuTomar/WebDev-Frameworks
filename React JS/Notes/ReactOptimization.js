@@ -1,9 +1,15 @@
+// => TECHINIQUES FOR OPTIMIZATION -
+
 // - What is Unnecessary Render ?
 // - Unnecessary Render is where the child component goes through the render phase but not the commit phase.
 
 // - Causes for Re-render -
 // 1. A component can re-render if it calls a setter function or a disptach function.
 // 2. A component can re-render if its parent component re-renders.
+
+// -------------------------------------------------------------------------------------------------
+// -> Technique For Optimization When Dealing With Parent And Child Component -
+// A. Same Element Reference  -
 
 // - Optimising the Unnecessary Render without Memoisation -
 // - To optimise the unnecessary render of the child component, we can move the child component from being invoked in the parent component JSX, to beings passed as a prop.
@@ -37,3 +43,7 @@
 // </div>
 
 // Note: If a parent component is re-rendering because of props change in parent component or cause by the re-rendering of the GrandParent Component then the child component will also have to be re-rendered.
+
+// B. React Memo (Recommended Way)-
+// - To let know React to only re-render the child component only when the passed props changed and not to do the unnecessary re-renders, We can use React.Memo() which is Higher Order Component which we can use to wrap components if they render the same result given the same props. Doing this will give a performance boost by memoising the render output. So, if our component props don't change between the renders, React will skip rendering the component and will reuse the last rendered result.
+// - React.memo() performs a shallow comparison of the previous and new props and re-render the child component only if the props have changed.
