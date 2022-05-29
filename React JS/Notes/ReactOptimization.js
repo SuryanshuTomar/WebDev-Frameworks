@@ -16,11 +16,11 @@
 // - It could be any prop, we here chose children prop.
 // - This will not cause the unnecessary render of the child components. Because in our component tree, when we call the setter function in the parent component, the parent component gets flagged for re-render and react will see the {children} props as the part of the JSX and this children props references the Child component. And As we know that, a component can change its state but it can never change its props.
 // - So, taking this into consideration, React automatically provides the optimization.
-// - This is also called as Same Elment Reference.
+// - This is also called as Same Element Reference.
 
 // Steps -
 // 1. Whenever there is re-render cause by change in the parent component state change, React looks at the Parent Component and It converts the JSX of parent component into the React Element along with props and children props.
-// 2. React sees that the render is cased by a state change in Parent component.
+// 2. React sees that the render is caused by a state change in Parent component.
 // 3. React sees that the props also include the child component reference but it has no means of directly changing the prop. So all props in the parent JSX will have the same reference/value as the previous one and will use the same value/reference for the props value.
 // 4. So, if any props is referencing to any child component then the same element reference will cause any change while diffing and render phase will be skipped for the child component.
 
@@ -61,8 +61,15 @@
 // - We can use it when the child component is being asked to re-render due to changes in the parent's state which do not affect the child components props in anyway.
 // - React.memo() will still work if the child component does not have any props. But it is recommended to use Same Element Reference in this case.
 
-
-
-// Ques 2- If React.memo() provides the optimization by comparing the props, why not wrap every single component with React.memo() ? or Why doesn't React just internally memoize every component and not expose React.memo() to the developers? 
+// Ques 2- If React.memo() provides the optimization by comparing the props, why not wrap every single component with React.memo() ? or Why doesn't React just internally memoize every component and not expose React.memo() to the developers?
 // Ans 2- "Shallow comparisons aren't free. They are O(prop count). And they only buy somthing if it bails out. All Comparisons where we end up re-rendering are wasted. Why would you expect always comparing to be faster?. Considering many components always get different props."
 // - One more thing to note is that, When we optimize the rendering of one component, React will also skip rendering that component's entire subtree because it's effectively stopping the default "render children recursively" behavior of React.
+
+// ---------------------------------------------------------------------------------------------
+// => Incorrect Memo With Children -
+
+// 1. There is no need to wrap the child component with React.memo() if the child component itself has children elements because children props will always has a new reference to due to which the child component will always re-render. The incorrect memo will always simply add to our component render time as new references to the children props will always cause the memoized child component to re-render.
+
+// 2. Using React.memo() with child components where props will not change but the UI will change due to the child component which are impure component(Components in which JSX will change even though the props and state remains the same) like using Date functions in JSX or MATH.random() in JSX where the result will always change every time the component is rendered. So, In this case also, React.memo() will be an incorrect Optimization.
+
+// 3. If we are passing object references to memoized child component(wrapped in React.memo()) then child component will always re-render and React optimazation will not happen because the object(all kind of objects like object literal, arrays, functions etc) reference we are passing to the child component will always change every time we re-render the parent component and since the reference is now changed the child component will also have to re-render always.
