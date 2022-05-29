@@ -74,3 +74,17 @@
 // 2. Using React.memo() with child components where props will not change but the UI will change due to the child component which are impure component(Components in which JSX will change even though the props and state remains the same) like using Date functions in JSX or MATH.random() in JSX where the result will always change every time the component is rendered. So, In this case also, React.memo() will be an incorrect Optimization.
 
 // 3. If we are passing object references to memoized child component(wrapped in React.memo()) then child component will always re-render and React optimazation will not happen because the object(all kind of objects like object literal, arrays, functions etc) reference we are passing to the child component will always change every time we re-render the parent component and since the reference is now changed the child component will also have to re-render always. (In this case, we can use useCallback and useMemo to have the correct optimzation for padding the object references)
+
+// ---------------------------------------------------------------------------------------------
+// => Context API Optimization Using React.memo -
+
+// - Whenver the context provider is in the parent component and the parent component's state updates, every child components re-renders and not just the component consuming the context value. As it is the default rendering behavior of React.
+
+// 1. One way to optimize is to use React.memo() - We can optimize it using React.memo() so that only the component consuming the context value will re-render and not all the children of context provider
+
+// 2. Another way to optimize is to use Same Element Reference -
+// - Example -(
+// 	<ContextParent>
+// 		<ChildA />
+// 	</ContextParent>
+// );

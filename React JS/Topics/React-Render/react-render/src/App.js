@@ -1,3 +1,4 @@
+import { ChildA } from "./context/ContextChildren";
 import { ContextParent } from "./context/ContextParent";
 // import { ParentFour } from "./components/Incorrect Optimization/ParentFour";
 // import { ParentThree } from "./components/Incorrect Optimization/ParentThree";
@@ -23,7 +24,9 @@ function App() {
 			{/* <ParentTwo /> */}
 			{/* <ParentThree /> */}
 			{/* <ParentFour /> */}
-			<ContextParent />
+			<ContextParent>
+				<ChildA />
+			</ContextParent>
 		</div>
 	);
 }
