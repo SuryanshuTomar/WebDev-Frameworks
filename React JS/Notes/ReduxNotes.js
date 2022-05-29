@@ -41,3 +41,24 @@
 //    3. Allows state to be updated via dispatch(action) method.
 //    4. Registers listeners via subscribe(listenerFunction) method.
 //    5. Handles unregistering of listeners via the function returned by subscribe(listener) method.
+
+// => Important Redux Functions or Properties -
+// 1. createStore and configureStore(Recommeded to use from Redux Tookit) to create a store.
+// Syntax:
+// const createStore = redux.createStore;
+// const store  = createStore();
+
+// 2. getState() to get the State of the store.
+// Syntax: store.getState();
+
+// 3. subscribe() to subscribe and unsubscribe our app to the store.
+// Syntax:
+// const unsubscribe = subscribe(callbackSubscribeFn) // To Subscribe
+// unsubscribe() // To Unsubscribe
+
+// 4. bindActionCreators to bind the action creator functions.
+// Syntax:
+// const bindActionCreators = redux.bindActionCreators;
+// const actions = bindActionCreators({actionCreatorFn1, actionCreatorFn2}, store.disptach).
+// actions.actionCreatorFn1()
+// actions.actionCreatorFn2()
