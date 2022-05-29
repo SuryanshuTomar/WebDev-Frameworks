@@ -82,9 +82,30 @@
 // - During the render phase, when react is converting the JSX code of the parent element to the React element, react check if it has any child component and if it has any, then react will proceed with the render phase of the child component also and conver the JSX of the child component to React element. Once, the JSX for both parent and child is converted to React element, React will diff the elements produced from the previous  render to the new render. And if React sees that only the parent component has changed while the child component is the same then react will only pass the changes of Parent component to the commit phase to be updated to the DOM and will drop the child component changes. Hence, even if the child component re-renders, the changes of the child component will never be commmited to the DOM if the child diff comes out to be the same as before. And this is called as Unnecessary Render.
 // - The Unnecessary Renders do affect the performance of an app.
 
+// ---------------------------------------------------------------------------------------------
+// 5.  Context API Rendering -
+
+// Component Tree -
+// App
+// ||
+// Parent => (State => counterValue) and (also provide the CountContext.Provider value)
+// ||
+// ChildA
+// ||
+// ChildB
+// ||
+// ChildC => (displaying counterValue)
+
+// - Steps -
+// - Lets say that the initial Render is completed and all the components have been rendered once and lets say we called the counter setter function to increment the counterValue and when the counterValue increments, then the parent component will be flagged for re-render.
+// -  We know that React starts from the root component and finds the component flagged for the re-render.
+// - React sees that the Parent component has been flagged for re-render.
+// - When rendering the Parent component, React also sees that the parent component also renders a context provider and then checks to see if the context provider has been given a new value. Since, we have incremented the counterValue so indeed provider has been given a new value.
+// - React will make a note to re-render all the component that consumes the context value and in our case that component is ChildC component.
+// - Rest of the Render and commit phase is same as usual.
 
 // ---------------------------------------------------------------------------------------------
-// -> Recap - Causes for Re-render - 
+// -> Recap - Causes for Re-render -
 
 // 1. A component can re-render if it calls a setter function or a disptach function.
 // 2. A component can re-render if its parent component re-renders.
