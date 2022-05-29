@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { MemoisedChildThree } from "./ChildThree";
+import { MemoisedChildFour } from "./ChildFour";
+// import { MemoisedChildThree } from "./ChildThree";
 
 export const ParentThree = () => {
 	const [count, setCount] = useState(0);
@@ -13,9 +14,10 @@ export const ParentThree = () => {
 				Click Me
 			</button>
 			<button onClick={() => setName("CodeEvolution")}>Change Name</button>
-			<MemoisedChildThree name={name}>
+			{/* <MemoisedChildThree name={name}>
 				<strong>Hello</strong>
-			</MemoisedChildThree>
+			</MemoisedChildThree> */}
+			<MemoisedChildFour name={name} />
 		</div>
 	);
 };
