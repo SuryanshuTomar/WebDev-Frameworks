@@ -6,6 +6,7 @@
 // - Causes for Re-render -
 // 1. A component can re-render if it calls a setter function or a disptach function.
 // 2. A component can re-render if its parent component re-renders.
+// 3. A component can re-render with Context API also.
 
 // -------------------------------------------------------------------------------------------------
 // -> Technique For Optimization When Dealing With Parent And Child Component -
