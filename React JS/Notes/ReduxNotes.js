@@ -20,11 +20,24 @@
 // - If our application want to to update the state, it has to emit or dispatch an action.
 // - Once the action has been dispatched, the reducer function then handles that action and updates the current state. And as soon as the state is updated, the newstate value will now be passed to our JS application because our app is subscribed to the store.
 
-
-// =>  Actions - 
+// =>  Actions -
 // - The only way our application can interact with the store.
 // - Carry some information from our app to the redux store.
 // - Plain JS Objects
 // - Have a "type" property that descibes something that happened in the application.
 // - The "type" property is typically defined as string contants.
 // - With Redux, we defines an actionCreater() function that simply creates an action and return that action.
+
+// => Reducer Function -
+// - Reducer specify how the app's state changes in response to actions sent to the store.
+// - It is a function that accepts state and action as arguments, and returns the next state of the application.
+// - (prevState, action) => newState
+
+// => Store -
+// - There will always be one store for the entire application.
+// - Responsibilities -
+//    1. Holds the application state.
+//    2. Allow access to state via getState() method.
+//    3. Allows state to be updated via dispatch(action) method.
+//    4. Registers listeners via subscribe(listenerFunction) method.
+//    5. Handles unregistering of listeners via the function returned by subscribe(listener) method.
