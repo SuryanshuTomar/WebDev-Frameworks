@@ -105,11 +105,11 @@ const actions = bindActionCreators(
 	{ orderCake, restockCake, orderIcecream, restockIcecream },
 	store.dispatch
 );
-actions.orderCake();
-actions.orderCake(2);
-actions.orderCake(4);
-actions.restockCake(5);
-actions.restockCake(8);
+// actions.orderCake();
+// actions.orderCake(2);
+// actions.orderCake(4);
+// actions.restockCake(5);
+// actions.restockCake(8);
 actions.orderIcecream();
 actions.orderIcecream(3);
 actions.restockIcecream();
