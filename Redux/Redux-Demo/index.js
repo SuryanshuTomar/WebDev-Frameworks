@@ -106,17 +106,17 @@ const actions = bindActionCreators(
 	store.dispatch
 );
 
-actions.orderCake();
-actions.orderCake(2);
-actions.orderCake(4);
-actions.restockCake(5);
-actions.restockCake(8);
-actions.orderIcecream();
-actions.orderIcecream(3);
-actions.orderIcecream(5);
-actions.restockIcecream();
-actions.restockIcecream(4);
-actions.restockIcecream(6);
+// actions.orderCake();
+// actions.orderCake(2);
+// actions.orderCake(4);
+// actions.restockCake(5);
+// actions.restockCake(8);
+// actions.orderIcecream();
+// actions.orderIcecream(3);
+// actions.orderIcecream(5);
+// actions.restockIcecream();
+// actions.restockIcecream(4);
+// actions.restockIcecream(6);
 
 
 
