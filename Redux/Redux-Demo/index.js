@@ -107,7 +107,7 @@ const actions = bindActionCreators(
 );
 
 // actions.orderCake();
-// actions.orderCake(2);
+// actions.orderCake(2);jnjnkjnjknknjjnkjnkj
 // actions.orderCake(4);
 // actions.restockCake(5);
 // actions.restockCake(8);
@@ -117,8 +117,6 @@ const actions = bindActionCreators(
 // actions.restockIcecream();
 // actions.restockIcecream(4);
 // actions.restockIcecream(6);
-
-
 
 // Unsubscribing the app from the store
 unsubscribe();
