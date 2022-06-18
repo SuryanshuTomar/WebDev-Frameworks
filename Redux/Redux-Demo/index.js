@@ -107,7 +107,7 @@ const actions = bindActionCreators(
 );
 
 // actions.orderCake();
-// actions.orderCake(2);jnjnkjnjknknjjnkjnkj
+// actions.orderCake(2);
 // actions.orderCake(4);
 // actions.restockCake(5);
 // actions.restockCake(8);
