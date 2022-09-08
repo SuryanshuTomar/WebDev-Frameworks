@@ -1,3 +1,4 @@
+import EventBind from "./components/BindingEventHandlers/EventBind";
 import FunctionClick from "./components/EventHandling/FunctionClick";
 import Counter from "./components/setState/Counter";
 import Message from "./components/state/Message";
@@ -7,7 +8,8 @@ function App() {
 		<div className="App">
 			{/* <Message /> */}
 			{/* <Counter /> */}
-			<FunctionClick />
+			{/* <FunctionClick /> */}
+			<EventBind />
 		</div>
 	);
 }
