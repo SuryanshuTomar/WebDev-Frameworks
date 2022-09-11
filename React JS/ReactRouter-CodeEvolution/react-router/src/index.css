@@ -37,7 +37,6 @@ nav.nav-primary a.active {
 	color: papayawhip;
 	text-shadow: 0 0 5px rgba(181, 188, 182, 0.576);
 	font-weight: bold;
-	font-style: italic;
 }
 
 nav.nav-primary a.active:hover {
