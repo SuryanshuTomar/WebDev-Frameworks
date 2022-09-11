@@ -3,6 +3,7 @@ import FunctionClick from "./components/EventHandling/FunctionClick";
 import ParentComponent from "./components/LiftingStateUp/ParentComponent";
 import Counter from "./components/setState/Counter";
 import Message from "./components/state/Message";
+import NameList from "./components/ListRendering/NameList";
 
 function App() {
 	return (
@@ -11,7 +12,8 @@ function App() {
 			{/* <Counter /> */}
 			{/* <FunctionClick /> */}
 			{/* <EventBind /> */}
-			<ParentComponent />
+			{/* <ParentComponent /> */}
+			<NameList />
 		</div>
 	);
 }
