@@ -4,6 +4,7 @@ import ParentComponent from "./components/LiftingStateUp/ParentComponent";
 import Counter from "./components/setState/Counter";
 import Message from "./components/state/Message";
 import NameList from "./components/ListRendering/NameList";
+import Form from "./components/FormHandling/Form";
 
 function App() {
 	return (
@@ -13,7 +14,8 @@ function App() {
 			{/* <FunctionClick /> */}
 			{/* <EventBind /> */}
 			{/* <ParentComponent /> */}
-			<NameList />
+			{/* <NameList /> */}
+			<Form />
 		</div>
 	);
 }
