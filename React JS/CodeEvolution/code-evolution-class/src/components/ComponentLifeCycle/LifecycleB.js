@@ -16,8 +16,26 @@ export class LifecycleB extends Component {
 		return null;
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log("LifecycleB shouldComponentUpdate method called...");
+		return true;
+	}
+
+	getSnapshotBeforeUpdate(prevProps, nextState) {
+		console.log("LifecycleB getSnapshotBeforeUpdate method called...");
+		return true;
+	}
+
+	componentDidUpdate(prevProps, nextState, snapShotValue) {
+		console.log("LifecycleB componentDidUpdate method called...");
+	}
+
 	componentDidMount() {
 		console.log("LifecycleB componentDidMount method called...");
+	}
+
+	componentWillUnmount() {
+		console.log("LifecycleB componentWillUnmount method called...");
 	}
 
 	render() {
