@@ -5,6 +5,7 @@ import Counter from "./components/setState/Counter";
 import Message from "./components/state/Message";
 import NameList from "./components/ListRendering/NameList";
 import Form from "./components/FormHandling/Form";
+import LifecycleA from "./components/ComponentLifeCycle/LifecycleA.js";
 
 function App() {
 	return (
@@ -15,7 +16,8 @@ function App() {
 			{/* <EventBind /> */}
 			{/* <ParentComponent /> */}
 			{/* <NameList /> */}
-			<Form />
+			{/* <Form /> */}
+			<LifecycleA />
 		</div>
 	);
 }
