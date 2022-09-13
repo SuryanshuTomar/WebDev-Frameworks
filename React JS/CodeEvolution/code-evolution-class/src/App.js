@@ -9,7 +9,8 @@ import LifecycleA from "./components/ComponentLifeCycle/LifecycleA.js";
 import ParentComp from "./components/PureComponentsClass/ParentComp";
 import RefDemo from "./components/Refs/RefDemo";
 import CallBackRefDemo from "./components/Refs/CallBackRefDemo";
-import RefAttachedToClassComp from "./components/Refs/RefAttachedToClassComp";
+import ForwardRefToClass from "./components/Refs/ForwardRefToClass";
+import ForwardRefToFunction from "./components/Refs/ForwardRefToFunction";
 
 function App() {
 	return (
@@ -25,7 +26,8 @@ function App() {
 			{/* <ParentComp /> */}
 			{/* <RefDemo /> */}
 			{/* <CallBackRefDemo /> */}
-			<RefAttachedToClassComp />
+			{/* <ForwardRefToClass /> */}
+			<ForwardRefToFunction />
 		</div>
 	);
 }
