@@ -6,6 +6,7 @@ import Message from "./components/state/Message";
 import NameList from "./components/ListRendering/NameList";
 import Form from "./components/FormHandling/Form";
 import LifecycleA from "./components/ComponentLifeCycle/LifecycleA.js";
+import ParentComp from "./components/PureComponents/ParentComp";
 
 function App() {
 	return (
@@ -17,7 +18,8 @@ function App() {
 			{/* <ParentComponent /> */}
 			{/* <NameList /> */}
 			{/* <Form /> */}
-			<LifecycleA />
+			{/* <LifecycleA /> */}
+			<ParentComp />
 		</div>
 	);
 }
