@@ -16,6 +16,7 @@ export class RefAttachedToClassComp extends Component {
 		return (
 			<div>
 				<h1>RefAttachedToClassComp</h1>
+				{/* Attaching ref to the class component*/}
 				<InputComp ref={this.componentRef} />
 				<button onClick={this.onClickHandler}>Focus Input</button>
 			</div>
