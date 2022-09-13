@@ -4,7 +4,7 @@ import InputComp from "./InputComp";
 export class RefAttachedToClassComp extends Component {
 	constructor(props) {
 		super(props);
-
+		// Note: Refs don't work with functions
 		this.componentRef = React.createRef();
 	}
 
