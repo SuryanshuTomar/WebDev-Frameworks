@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import InputComp from "./InputComp";
 
-export class RefAttachedToClassComp extends Component {
+export class ForwardRefToClass extends Component {
 	constructor(props) {
 		super(props);
 		// Note: Refs don't work with functions
@@ -17,7 +17,7 @@ export class RefAttachedToClassComp extends Component {
 	render() {
 		return (
 			<div>
-				<h1>RefAttachedToClassComp</h1>
+				<h1>ForwardRefToClass</h1>
 				{/* Attaching ref to the child class component*/}
 				<InputComp ref={this.componentRef} />
 				<button onClick={this.onClickHandler}>Focus Input</button>
@@ -26,4 +26,4 @@ export class RefAttachedToClassComp extends Component {
 	}
 }
 
-export default RefAttachedToClassComp;
+export default ForwardRefToClass;
