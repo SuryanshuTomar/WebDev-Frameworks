@@ -29,7 +29,7 @@ class RefDemo extends Component {
 		return (
 			<div>
 				<h1>RefDemo</h1>
-				{/* Step2: Assign the "inputRef" value to the Reserved "ref" named attribute  */}
+				{/* Step2: Attaching the reference "ref" of an element and assigning the "inputRef" value to the Reserved "ref" named attribute  */}
 				<input
 					type="text"
 					ref={this.inputRef}
