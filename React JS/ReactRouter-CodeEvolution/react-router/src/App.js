@@ -31,7 +31,7 @@ function App() {
 				</Route>
 
 				<Route path="users" element={<Users />}>
-					<Route path=":id" element={<UserDetails />} />
+					<Route path=":userId" element={<UserDetails />} />
 					<Route path="admin" element={<Admin />} />
 				</Route>
 
