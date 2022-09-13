@@ -18,7 +18,9 @@ function App() {
 				<Route path="order-summary" element={<OrderSummary />} />
 
 				<Route path="products" element={<Products />}>
-					{/* Index Route */}
+					{/* Index Route*/}
+					{/* It will take the path of its parent route which is "products" in
+					this case. */}
 					<Route index element={<FeaturedProducts />} />
 					{/* Nested Routes */}
 					<Route path="new" element={<NewProducts />} />
