@@ -7,6 +7,8 @@ import NameList from "./components/ListRendering/NameList";
 import Form from "./components/FormHandling/Form";
 import LifecycleA from "./components/ComponentLifeCycle/LifecycleA.js";
 import ParentComp from "./components/PureComponentsClass/ParentComp";
+import RefDemo from "./components/Refs/RefDemo";
+import CallBackRefDemo from "./components/Refs/CallBackRefDemo";
 
 function App() {
 	return (
@@ -19,7 +21,9 @@ function App() {
 			{/* <NameList /> */}
 			{/* <Form /> */}
 			{/* <LifecycleA /> */}
-			<ParentComp />
+			{/* <ParentComp /> */}
+			{/* <RefDemo /> */}
+			{/* <CallBackRefDemo /> */}
 		</div>
 	);
 }
