@@ -23,6 +23,9 @@ function Navbar() {
 			<NavLink style={navLinkStyle} to="/about">
 				About
 			</NavLink>
+			<NavLink style={navLinkStyle} to="/products">
+				Products
+			</NavLink>
 		</nav>
 	);
 }
