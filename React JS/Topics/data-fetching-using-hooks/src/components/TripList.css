@@ -14,3 +14,19 @@
 	list-style-type: none;
 	margin: 2px 0;
 }
+
+.filters {
+	padding: 5px;
+	margin: 10px;
+	flex-grow: 1;
+	background-color: #e4e4e4;
+}
+
+button {
+	padding: 10px;
+	margin: 10px;
+	flex-grow: 1;
+	background-color: gray;
+	color: white;
+	border: none;
+}
