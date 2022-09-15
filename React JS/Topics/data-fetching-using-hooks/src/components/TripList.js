@@ -5,7 +5,7 @@ import { useFetch } from "../hooks/useFetch";
 function TripList() {
 	const [url, setUrl] = useState("http://localhost:3000/trips");
 
-	const { data: trips } = useFetch(url);
+	const { data: trips, isPending, error } = useFetch(url);
 	// setTrips(data);
 
 	// const fetchTrips = useCallback(async () => {
@@ -47,6 +47,8 @@ function TripList() {
 						</li>
 					);
 				})}
+				{isPending && <h1>Loading Trips....</h1>}
+				{error && <h1>Something went wrong 😞</h1>}
 			</ul>
 		</div>
 	);
