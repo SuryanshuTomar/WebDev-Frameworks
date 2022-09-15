@@ -1,19 +1,22 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "./TripList.css";
+import { useFetch } from "../hooks/useFetch";
 
 function TripList() {
-	const [trips, setTrips] = useState([]);
 	const [url, setUrl] = useState("http://localhost:3000/trips");
 
-	const fetchTrips = useCallback(async () => {
-		const response = await fetch(url);
-		const data = await response.json();
-		setTrips(data);
-	}, [url]);
+	const { data: trips } = useFetch(url);
+	// setTrips(data);
 
-	useEffect(() => {
-		fetchTrips();
-	}, [fetchTrips]);
+	// const fetchTrips = useCallback(async () => {
+	// 	const response = await fetch(url);
+	// 	const data = await response.json();
+	// 	setTrips(data);
+	// }, [url]);
+
+	// useEffect(() => {
+	// 	fetchTrips();
+	// }, [fetchTrips]);
 
 	return (
 		<div className="trip-list">
@@ -36,7 +39,7 @@ function TripList() {
 			</div>
 			<hr />
 			<ul>
-				{trips.map((trip) => {
+				{trips?.map((trip) => {
 					return (
 						<li key={trip.id}>
 							<h3>Name: {trip.title}</h3>
