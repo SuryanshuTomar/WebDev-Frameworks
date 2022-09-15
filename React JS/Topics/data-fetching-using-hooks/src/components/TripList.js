@@ -38,17 +38,18 @@ function TripList() {
 				</button>
 			</div>
 			<hr />
+			{isPending && <h1>Loading Trips....</h1>}
+			{error && <h1>Something went wrong 😞</h1>}
 			<ul>
-				{trips?.map((trip) => {
-					return (
-						<li key={trip.id}>
-							<h3>Name: {trip.title}</h3>
-							<p>Price: {trip.price}</p>
-						</li>
-					);
-				})}
-				{isPending && <h1>Loading Trips....</h1>}
-				{error && <h1>Something went wrong 😞</h1>}
+				{!isPending &&
+					trips?.map((trip) => {
+						return (
+							<li key={trip.id}>
+								<h3>Name: {trip.title}</h3>
+								<p>Price: {trip.price}</p>
+							</li>
+						);
+					})}
 			</ul>
 		</div>
 	);
