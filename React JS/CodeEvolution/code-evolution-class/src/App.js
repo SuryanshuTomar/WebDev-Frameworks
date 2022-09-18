@@ -19,6 +19,8 @@ import HoverCounter from "./components/HigherOrderComponents/HoverCounter";
 import ClickCounterTwo from "./components/RenderProps/ClickCounterTwo";
 import HoverCounterTwo from "./components/RenderProps/HoverCounterTwo";
 import CounterRenderProps from "./components/RenderProps/Counter";
+import ComponentC from "./components/ContextAPI/ComponentC";
+import { UserProvider } from "./components/ContextAPI/UserContext";
 
 function App() {
 	return (
@@ -49,7 +51,7 @@ function App() {
 			{/* Higher Order Functions
 			<ClickCounter />
 			<HoverCounter /> */}
-			Render Props
+			{/* Render Props
 			<CounterRenderProps
 				// render prop takes function as a value and renders a child component in that function and along with that pass the parameters(which are recieved from RenderProp component) as the props in its child component which is in need of that functionality.
 				render={(count, incrementCount) => (
@@ -60,7 +62,12 @@ function App() {
 				render={(count, incrementCount) => (
 					<HoverCounterTwo count={count} incrementCount={incrementCount} />
 				)}
-			/>
+			/> */}
+
+			{/* Context API
+			<UserProvider value="Death">
+				<ComponentC />
+			</UserProvider> */}
 		</div>
 	);
 }
