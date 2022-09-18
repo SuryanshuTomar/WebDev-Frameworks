@@ -23,6 +23,7 @@ const withCounter = (WrappedComponent) => {
 					name="Death"
 					incrementCount={this.incrementCount}
 					count={this.state.count}
+					{...this.props}
 				/>
 			);
 		}
