@@ -14,6 +14,8 @@ import ForwardRefToFunction from "./components/Refs/ForwardRefToFunction";
 import Portal from "./components/Portals/Portal";
 import Hero from "./components/ComponentLifeCycle/ErrorBoundary/Hero";
 import ErrorBoundary from "./components/ComponentLifeCycle/ErrorBoundary/ErrorBoundary";
+import ClickCounter from "./components/HigherOrderComponents/ClickCounter";
+import HoverCounter from "./components/HigherOrderComponents/HoverCounter";
 
 function App() {
 	return (
@@ -32,7 +34,7 @@ function App() {
 			{/* <ForwardRefToClass /> */}
 			{/* <ForwardRefToFunction /> */}
 			{/* <Portal /> */}
-			<ErrorBoundary>
+			{/* <ErrorBoundary>
 				<Hero heroName="IronMan" />
 			</ErrorBoundary>
 			<ErrorBoundary>
@@ -40,7 +42,10 @@ function App() {
 			</ErrorBoundary>
 			<ErrorBoundary>
 				<Hero heroName="Joker" />
-			</ErrorBoundary>
+			</ErrorBoundary> */}
+			Higher Order Functions
+			<ClickCounter />
+			<HoverCounter />
 		</div>
 	);
 }
