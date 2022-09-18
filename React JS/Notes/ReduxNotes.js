@@ -1,5 +1,6 @@
 // What is Redux ?
 // - Redux is a Predictable State Container for JS Apps
+// - Redux is a library and is not tied to React, Redux is for JavaScript applications. It can use with React, Angular, Vue or even Vanilla JS.
 // - It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test.
 // - We can use Redux together with React, or with any other view library. It is tiny (2kB, including dependencies), but has a large ecosystem of addons available.
 
