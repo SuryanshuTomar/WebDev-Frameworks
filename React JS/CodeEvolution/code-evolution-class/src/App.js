@@ -11,6 +11,7 @@ import RefDemo from "./components/Refs/RefDemo";
 import CallBackRefDemo from "./components/Refs/CallBackRefDemo";
 import ForwardRefToClass from "./components/Refs/ForwardRefToClass";
 import ForwardRefToFunction from "./components/Refs/ForwardRefToFunction";
+import Portal from "./components/Portals/Portal";
 
 function App() {
 	return (
@@ -27,7 +28,8 @@ function App() {
 			{/* <RefDemo /> */}
 			{/* <CallBackRefDemo /> */}
 			{/* <ForwardRefToClass /> */}
-			<ForwardRefToFunction />
+			{/* <ForwardRefToFunction /> */}
+			<Portal />
 		</div>
 	);
 }
