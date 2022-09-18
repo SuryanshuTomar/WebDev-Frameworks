@@ -6,7 +6,7 @@
 //       d. componentDidMount
 
 // 2. Updating - When a component is being re-rendered as a result of changes to either its props or state.
-//       a. static getDerivedStateFromProps(props, state)
+//       a. static getDerivedStateFromProps(props, state) - This method is called when the state of the component depends on changes in props over time.
 //       b. shouldComponentUpdate(nextProps, nextState) (for performance optimization)
 //       c. render
 //       d. getSnapshotBeforeUpdate(prevProps, prevState) (it will either return an object
