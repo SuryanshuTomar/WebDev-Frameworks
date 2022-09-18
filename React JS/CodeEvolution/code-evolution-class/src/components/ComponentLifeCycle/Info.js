@@ -19,5 +19,13 @@
 //       a. componentWillUnmount
 
 // 4. Error Handling -  When there is an error during rendering, in a lifecycle method, or in the constructor of any child component.
-//       a. static getDerivedStateFromError
-//       b. componentDidCatch
+//       a. static getDerivedStateFromError (This method is used to render a fallback UI after an error is thrown)
+//       b. componentDidCatch (This method is used to log the error information)
+
+// -> Error Boundary - A class component that implements either one or both of the lifecycle methods getDerivedStateFromError() or componentDidCatch() becomes an Error Boundary.
+
+// Note:
+// 1. Error Boundaries catch error during rendering in lifecycle methods and in the constructors of the whole React tree but they dont catch error inside Event Handlers. For them, we need to use try and catch blocks.
+// 2. A class component becomes an Error Boundary by defining either or both of getDerivedStateFromError and componentDidCatch lifecycle methods.
+// 3. The Placement of the Error Boundary also matters as it controls if the entire app should have the fall-back UI or just the component causing the problem.
+// 4. Provide a way to gracefully handle error in application code.

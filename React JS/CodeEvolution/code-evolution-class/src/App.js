@@ -12,6 +12,8 @@ import CallBackRefDemo from "./components/Refs/CallBackRefDemo";
 import ForwardRefToClass from "./components/Refs/ForwardRefToClass";
 import ForwardRefToFunction from "./components/Refs/ForwardRefToFunction";
 import Portal from "./components/Portals/Portal";
+import Hero from "./components/ComponentLifeCycle/ErrorBoundary/Hero";
+import ErrorBoundary from "./components/ComponentLifeCycle/ErrorBoundary/ErrorBoundary";
 
 function App() {
 	return (
@@ -29,7 +31,16 @@ function App() {
 			{/* <CallBackRefDemo /> */}
 			{/* <ForwardRefToClass /> */}
 			{/* <ForwardRefToFunction /> */}
-			<Portal />
+			{/* <Portal /> */}
+			<ErrorBoundary>
+				<Hero heroName="IronMan" />
+			</ErrorBoundary>
+			<ErrorBoundary>
+				<Hero heroName="Superman" />
+			</ErrorBoundary>
+			<ErrorBoundary>
+				<Hero heroName="Joker" />
+			</ErrorBoundary>
 		</div>
 	);
 }
