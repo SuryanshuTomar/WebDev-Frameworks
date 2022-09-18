@@ -17,6 +17,7 @@ class CounterRenderProps extends Component {
 
 	render() {
 		return (
+			// It only renders the props which has been passed to this component and pass the functions and state that are needed by the other components.
 			<div>{this.props.render(this.state.count, this.incrementCount)}</div>
 		);
 	}

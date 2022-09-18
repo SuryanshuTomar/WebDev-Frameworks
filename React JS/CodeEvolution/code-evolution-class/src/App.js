@@ -51,6 +51,7 @@ function App() {
 			<HoverCounter /> */}
 			Render Props
 			<CounterRenderProps
+				// render prop takes function as a value and renders a child component in that function and along with that pass the parameters(which are recieved from RenderProp component) as the props in its child component which is in need of that functionality.
 				render={(count, incrementCount) => (
 					<ClickCounterTwo count={count} incrementCount={incrementCount} />
 				)}
