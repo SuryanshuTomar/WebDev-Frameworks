@@ -1,7 +1,9 @@
 import React from "react";
 
-const UpdatedComponent = (OriginalComponent) => {
-	class NewComponent extends React.Component {
+// The HOC will be named starting with "with" followed by functionality in camelCase
+const withCounter = (WrappedComponent) => {
+	// The new enhanced component which will be returned will be named same as the HOC but with PascalCase
+	class WithCounter extends React.Component {
 		constructor(props) {
 			super(props);
 
@@ -16,7 +18,8 @@ const UpdatedComponent = (OriginalComponent) => {
 
 		render() {
 			return (
-				<OriginalComponent
+				// The originalComponent should be name WrappedComponent
+				<WrappedComponent
 					name="Death"
 					incrementCount={this.incrementCount}
 					count={this.state.count}
@@ -24,7 +27,7 @@ const UpdatedComponent = (OriginalComponent) => {
 			);
 		}
 	}
-	return NewComponent;
+	return WithCounter;
 };
 
-export default UpdatedComponent;
+export default withCounter;
