@@ -1,6 +1,7 @@
 // => Higher Order Component -
 
 // - A pattern where a funciton takes a component as an argument and return a new component.
+// - This pattern is used for sharing functionality between components
 // - eg -
 // const EnhancedComponent = higherOrderComponent(originalComponent)
 // const IronMan = withSuit(TonyStark)
