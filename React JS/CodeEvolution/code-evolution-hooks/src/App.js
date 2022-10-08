@@ -1,9 +1,16 @@
 import ParentComp from "./components/PureComponentsFunction/ParentComp";
+import HookCounter from "./components/useState/HookCounter";
+import HookCounterObject from "./components/useState/HookCounterObject";
+import HookCounterPrevState from "./components/useState/HookCounterPrevState";
 
 function App() {
 	return (
 		<div className="App">
-			<ParentComp />
+			{/* <HookCounter /> */}
+			{/* <HookCounterPrevState /> */}
+			<HookCounterObject />
+
+			{/* <ParentComp /> */}
 		</div>
 	);
 }
