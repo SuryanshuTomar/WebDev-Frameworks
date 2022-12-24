@@ -1,7 +1,7 @@
 function Homepage() {
 	return (
 		<div>
-			<h1>Homepage</h1>
+			<h1>Route Page: Homepage or main index page</h1>
 		</div>
 	);
 }
