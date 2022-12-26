@@ -6,7 +6,10 @@ function Homepage() {
 
 	const handleClick = () => {
 		alert("Order Placed Succesfully !!");
-		router.push("/product");
+		// push the path into the history before navigating.
+		// router.push("/product");
+		// replace the current path in the history before navigating
+		router.replace("/product");
 	};
 
 	return (
