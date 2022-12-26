@@ -1,6 +1,7 @@
 // => NEXT JS INTRO AND BASICS -
 
 import { element } from "prop-types";
+import { getStaticProps } from "./pre-rendering/next-js/pages/users";
 
 // - NEXT 12 and Before -
 
@@ -71,3 +72,17 @@ import { element } from "prop-types";
 // - So, nextjs team decided -
 // iii. For production builds - a page will pre-rendered once when we run the build command.
 // iv. But in developement mode - a page will be pre-rendered for every request we are going to make.
+
+// -> Static Generation without Data -
+// - By default it is done by the next js when we are not doing loading or fetching data from external sources to the page.
+
+// -> Static Generation with Data -
+// - It is done using the async method getStaticProps() which runs after the page is pre-rendered.
+// - This method is used to fetch data or for any other asynchronous task and then it returns an object with a key "props" which is also an object with the result data we want to load in to our page.
+// - The returned object from the getStaticProps() method is then passed as props to the page main component and then can be used to in the page later.
+
+// Note -
+// 1. getStaticProps() runs only on the server-side and this function will never run on client-side. and that's we even if try to print any thing in this function, will be seen in the terminal and not in the console of browser only after hard-reload of the page. Infact, the code we write inside the getStaticProps() won't even be included in the JS bundle that is sent to the browser.
+// 2. This means, we can write server-side code directly in getStaticProps(). So, Accessing the file system using fs module or querying a database can be done inside getStaticProps().
+// 3. getStaticProps() is allowed only in a file from the pages folder and cannot be run from a regular component file. It is used for pre-rendering and not client-side data fetching.
+// 4. getStaticProps will run at build time in production. But during development, getStaticProps runs on every request.
