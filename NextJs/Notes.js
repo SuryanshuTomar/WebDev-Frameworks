@@ -55,3 +55,19 @@ import { element } from "prop-types";
 
 // -> Client Side Data Fetching.
 // -> Combining pre-rendering with client-side data fetching.
+
+// 1. -> Static Generation -
+//    - A method of pre-rendering where the HTML pages are generated at BUILD-TIME.
+//    - The HTML with all the data that makes up the content of the web page are generate in advance when you build your application.
+//    - It is recommended to pre-render pages whenever possible because with this method pages can be built once, cached by CDN and served to the client almost instantly.
+//    - Examples where to use it - Blog pages, e-commerce product pages, documentation and marketing pages.
+//    - NextJS, by default will pre-render every page in our app.
+//    - The HTML for every page will automatically be statically generated when we build our application.
+
+// Question - But aren't we first running the application in the developement mode when creating the application and since nextjs pre-renders every page at build-time then how it is generating pre-rendered pages in developement mode ?
+// Answer -
+// i. Production Server - An optimised build is created once you deploy the build(create the build). You don't make any code changes on the go once its deployed.
+// ii Development Server - We should be able to make changes in our code and we want the code to immediatedly reflect in the browser.
+// - So, nextjs team decided -
+// iii. For production builds - a page will pre-rendered once when we run the build command.
+// iv. But in developement mode - a page will be pre-rendered for every request we are going to make.
