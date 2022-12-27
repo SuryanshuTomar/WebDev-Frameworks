@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
 function Box1() {
-  return (
-    <div>Box1</div>
-  )
+	return (
+		<div className="box-container">
+			<h3>BOX 1</h3>
+			<div className="box"></div>
+		</div>
+	);
 }
 
-export default Box1
+export default Box1;
