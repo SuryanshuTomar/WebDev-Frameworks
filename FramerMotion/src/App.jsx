@@ -5,6 +5,7 @@ import Box4 from "./components/Box4";
 
 // APP CSS File -
 import "./App.css";
+import Box5 from "./components/Box5";
 
 function App() {
 	return (
@@ -19,6 +20,8 @@ function App() {
 			<Box3 />
 			<hr />
 			<Box4 />
+			<hr />
+			<Box5 />
 			<hr />
 		</div>
 	);
