@@ -39,3 +39,9 @@
 	background-color: red;
 	border-radius: 50%;
 }
+
+button {
+	margin-bottom: 2rem;
+	margin-right: 1rem;
+	cursor: pointer;
+}
