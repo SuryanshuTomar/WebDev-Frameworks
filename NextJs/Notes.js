@@ -46,10 +46,16 @@ import { getStaticProps } from "./pre-rendering/next-js/pages/users";
 
 // -> Types of Pre-Rendering -
 // 1. Static Generation -
-//    - without data
-//    - with data
-//    - Increamental Static Generation
-//    - Dynamic Parameters when Fetching Data
+//    A. without data (SG)-
+//    (Static Generation) -> automatically rendered as static HTML (uses no props)
+
+//    B. with data (SSG)-
+//    (Static Site Generation) -> automatically rendered as static HTML + JSON (uses getStaticProps())
+
+//    C. Increamental Static Regeneration (ISR) -
+//    (ISR) -> It uses revalidate in getStaticProps().
+
+//    D. Dynamic Parameters when Fetching Data
 
 // 2. Server-Side Rendering -
 //    - data fetching
