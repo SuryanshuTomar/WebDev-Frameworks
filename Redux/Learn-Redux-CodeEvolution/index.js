@@ -1,122 +1,77 @@
-// Importing the redux module
+// Import redux
 const redux = require("redux");
 
-// Getting createStore instance
-// const createStore = redux.createStore;
-const createStore = redux.legacy_createStore;
-
-// Bind Action Creator
+// GET CREATESTORE INSTANCE
+const createStore = redux.createStore;
 const bindActionCreators = redux.bindActionCreators;
 
-// Action Types
+// ACTION TYPE
 const CAKE_ORDERED = "CAKE_ORDERED";
-const RESTOCK_CAKE = "RESTOCK_CAKE";
-const ICECREAM_ORDERED = "ICECREAM_ORDERED";
-const RESTOCK_ICECREAM = "RESTOCK_ICECREAM";
+const RESTORE_CAKE = "RESTORE_CAKE";
 
-// --------------------------------------------------------------------------------------------
-// Action Creator for Ordering cake
+// ACTION CREATOR
 function orderCake(qty = 1) {
-	// Action
 	return {
 		type: CAKE_ORDERED,
 		payload: qty,
 	};
 }
 
-// Action Creator for Restocking cake
 function restockCake(qty = 1) {
 	return {
-		type: RESTOCK_CAKE,
+		type: RESTORE_CAKE,
 		payload: qty,
 	};
 }
 
-// Action Creator for Ordering Icecream
-function orderIcecream(qty = 1) {
-	return {
-		type: ICECREAM_ORDERED,
-		payload: qty,
-	};
-}
-
-// Action Creator for Restocking Icecream
-function restockIcecream(qty = 1) {
-	return {
-		type: RESTOCK_ICECREAM,
-		payload: qty,
-	};
-}
-
-// --------------------------------------------------------------------------------------------
-// Initial State (state of a store has to be represent with a single object always)
+// INITIAL STATE
 const initialState = {
-	numOfCakes: 10,
-	numOfIcecreams: 20,
+	noOfCakes: 10,
 };
 
-// Reducer Functions -
-const shopReducer = (state = initialState, action) => {
+// REDUCER FUNCTION
+const cakeReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case CAKE_ORDERED:
-			return { ...state, numOfCakes: state.numOfCakes - action.payload };
-		case RESTOCK_CAKE:
-			return { ...state, numOfCakes: state.numOfCakes + action.payload };
-		case ICECREAM_ORDERED:
-			return {
-				...state,
-				numOfIcecreams: state.numOfIcecreams - action.payload,
-			};
-		case RESTOCK_ICECREAM:
-			return {
-				...state,
-				numOfIcecreams: state.numOfIcecreams + action.payload,
-			};
+			return { ...state, noOfCakes: state.noOfCakes - action.payload };
+		case RESTORE_CAKE:
+			return { ...state, noOfCakes: state.noOfCakes + action.payload };
 		default:
 			return state;
 	}
 };
 
-// const
+// CREATE STORE
+const store = createStore(cakeReducer);
 
-// --------------------------------------------------------------------------------------------
-// Creating the Store
-const store = createStore(shopReducer);
+// GET INITIAL STATE
+console.log("Initial State : ", store.getState());
 
-// Get state
-console.log("Initial State: ", store.getState());
-
-// Subscribing app to the store for changes
+// SUBSCRIBE TO THE STORE
+// GET UPDATED STATE FROM STORE
 const unsubscribe = store.subscribe(() =>
-	console.log("Updated State: ", store.getState())
+	console.log("Updated state: ", store.getState())
 );
 
-// Dispatching action to reducer to update state
+// DISPATCH ACTION METHOD - 1
 // store.dispatch(orderCake());
-// store.dispatch(orderCake(2));
-// store.dispatch(orderCake(4));
+// store.dispatch(orderCake());
+// store.dispatch(orderCake(5));
+// store.dispatch(restockCake());
+// store.dispatch(restockCake(2));
+// store.dispatch(restockCake(4));
 
-// Dispatching action for Restocking cake
-// store.dispatch(restockCake(5));
-// store.dispatch(restockCake(8));
+// DISPATCH ACTION METHOD - 2
+// 1. BIND ACTION CREATORS WITH DISPATCH
+const actions = bindActionCreators({ orderCake, restockCake }, store.dispatch);
 
-// Another way of Dispatching action
-const actions = bindActionCreators(
-	{ orderCake, restockCake, orderIcecream, restockIcecream },
-	store.dispatch
-);
+// 2. CALL THE ACTION CREATOR FUNCTION USING ACTIONS
+actions.orderCake();
+actions.orderCake();
+actions.orderCake(5);
+actions.restockCake();
+actions.restockCake(2);
+actions.restockCake(4);
 
-// actions.orderCake();
-// actions.orderCake(2);fdjfdjhgfdjhhgfdjtdjjf
-// actions.orderCake(4);
-// actions.restockCake(5);
-// actions.restockCake(8);
-// actions.orderIcecream();
-// actions.orderIcecream(3);
-// actions.orderIcecream(5);
-// actions.restockIcecream();
-// actions.restockIcecream(4);
-// actions.restockIcecream(6);
-
-// Unsubscribing the app from the store
+// UNSUBSCRIBE TO THE STORE
 unsubscribe();
