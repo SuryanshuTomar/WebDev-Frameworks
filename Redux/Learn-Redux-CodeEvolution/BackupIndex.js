@@ -77,7 +77,6 @@ const shopReducer = (state = initialState, action) => {
 	}
 };
 
-// const
 
 // --------------------------------------------------------------------------------------------
 // Creating the Store
@@ -107,7 +106,7 @@ const actions = bindActionCreators(
 );
 
 // actions.orderCake();
-// actions.orderCake(2);fdjfdjhgfdjhhgfdjtdjjf
+// actions.orderCake(2);
 // actions.orderCake(4);
 // actions.restockCake(5);
 // actions.restockCake(8);
