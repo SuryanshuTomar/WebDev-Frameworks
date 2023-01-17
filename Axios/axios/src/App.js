@@ -1,8 +1,7 @@
 import Title from "./components/Title";
-import Setup from "./examples/5-custom-instance";
+import Setup from "./examples/6-interceptors";
 
 // import "./axios/global";
-
 
 function App() {
 	return (
