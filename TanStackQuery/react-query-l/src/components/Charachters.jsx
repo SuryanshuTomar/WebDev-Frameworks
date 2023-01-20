@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
 import RickMortyFetch from "../axios/RickMortyFetch";
+import SingleCharachter from "./SingleCharachter";
 
 function Charachters() {
 	const fetchCharachers = async () => {
@@ -23,9 +24,9 @@ function Charachters() {
 	}
 
 	return (
-		<div>
+		<div className="characters">
 			{charachtersData.results.map((character) => (
-				<h3 key={character.id}>{character.name}</h3>
+				<SingleCharachter key={character.id} character={character} />
 			))}
 		</div>
 	);
