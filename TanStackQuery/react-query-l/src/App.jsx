@@ -1,20 +1,19 @@
 import { QueryClientProvider, QueryClient } from "react-query";
-
-import "./App.css";
-
 import Charachters from "./components/Charachters";
 import CharachtersUsingAxios from "./components/CharachtersUsingAxios";
+import "./App.css";
 
 const queryClient = new QueryClient();
 
 function App() {
 	return (
 		<div className="App">
-			{/* <CharachtersUsingAxios /> */}
-
-			<QueryClientProvider client={queryClient}>
-				<Charachters />
-			</QueryClientProvider>
+			<div className="container">
+				<h1>Rick and Morty</h1>
+				<QueryClientProvider client={queryClient}>
+					<Charachters />
+				</QueryClientProvider>
+			</div>
 		</div>
 	);
 }
