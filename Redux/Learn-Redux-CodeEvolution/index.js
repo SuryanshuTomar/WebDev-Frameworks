@@ -1,69 +1,96 @@
+// IMPORTS
 const redux = require("redux");
-const produce = require("immer").produce;
+const axios = require("axios");
+const reduxThunkMiddleware = require("redux-thunk").default;
 
+// REDUX INSTANCES
+const createStore = redux.createStore;
+const applyMiddleware = redux.applyMiddleware;
+
+// INITIAL STATE
 const initialState = {
-	name: "Death Slayer",
-	address: {
-		street: "123 Side St",
-		city: "New York City",
-		state: "NY",
-	},
+	loading: false,
+	users: [],
+	error: "",
 };
 
-const STREET_UPDATED = "STREET_UPDATED";
-const updateStreet = (street) => {
+// ACTIONS
+const FETCH_USERS_REQUESTED = "FETCH_USERS_REQUESTED";
+const FETCH_USERS_SUCCEEDED = "FETCH_USERS_SUCCEEDED";
+const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
+
+// ACTION CREATORS
+const fetchUserRequest = () => {
 	return {
-		type: STREET_UPDATED,
-		payload: street,
+		type: FETCH_USERS_REQUESTED,
 	};
 };
 
-const reducer = (state = initialState, action) => {
-	switch (action.type) {
-		case STREET_UPDATED:
-			// 	Manual updating of the state in redux
-			// 	return {
-			// 		...state,
-			// 		address: {
-			// 			...state.address,
-			// 			street: action.payload,
-			// 		},
-			// };
-			// Updating state using immer.producer method
-			// Syntax ->
-			// produce(initialState, Function(immutableState -> using which we can update the state))
-			return produce(state, (draft) => {
-				draft.address.city = action.payload;
+const fetchUserSuccess = (users) => {
+	return {
+		type: FETCH_USERS_SUCCEEDED,
+		payload: users,
+	};
+};
+
+const fetchUserFailure = (error) => {
+	return {
+		type: FETCH_USERS_FAILED,
+		payload: error,
+	};
+};
+
+// ASYNC ACTION CREATOR -
+// THAT RETURNS A FUNCTION WITH DISPATCH METHOD AS ITS ARGUMENTS INSTEAD OF AN ACTION OBJECT
+const fetchUsers = () => {
+	return function (dispatch) {
+		dispatch(fetchUserRequest());
+		axios
+			.get("https://jsonplaceholder.typicode.com/users")
+			.then((response) => {
+				const users = response.data.map((user) => user.id);
+				dispatch(fetchUserSuccess(users));
+			})
+			.catch((error) => {
+				dispatch(fetchUserFailure(error.message));
 			});
-		default: {
+	};
+};
+
+// REDUCER
+const userReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case FETCH_USERS_REQUESTED:
+			return {
+				...state,
+				loading: true,
+			};
+		case FETCH_USERS_SUCCEEDED:
+			return {
+				loading: false,
+				users: action.payload,
+				error: "",
+			};
+		case FETCH_USERS_FAILED:
+			return {
+				loading: false,
+				users: [],
+				error: action.payload,
+			};
+		default:
 			return state;
-		}
 	}
 };
 
-// get the creatStore instance
-const createStore = redux.createStore;
+// CREATE THE STORE WITH REDUX THUNK MIDDLEWARE
+const store = createStore(userReducer, applyMiddleware(reduxThunkMiddleware));
 
-// get the bindActionCreators instance
-const bindActionCreators = redux.bindActionCreators;
-
-// create the store
-const store = createStore(reducer);
-
-// Print the initial state
-console.log("Initial State: ", initialState);
-
-// Subscribe to the store
+// SUBSCRIBE TO THE STORE
 const unsubscribe = store.subscribe(() => {
-	console.log("Updated State: ", store.getState());
+	console.log(store.getState());
 });
 
-// Dispatch Action Method 1
-// store.dispatch(updateStreet("456 Hyperloop Line"));
+// DISPATCHING THE ASYNC ACTION CREATOR
+store.dispatch(fetchUsers());
 
-// Dispatch Action Method 2
-const actionDispatcher = bindActionCreators({ updateStreet }, store.dispatch);
-actionDispatcher.updateStreet("465 Main St");
-
-// Unsubscribe to the store
-unsubscribe();
+// unsubscribe();
