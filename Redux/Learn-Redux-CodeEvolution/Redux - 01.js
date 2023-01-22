@@ -1,3 +1,5 @@
+// => STORE WITH SINGLE REDUCER AND MULTIPLE STATE - 
+
 // Importing the redux module
 const redux = require("redux");
 
