@@ -89,13 +89,13 @@ const unsubscribe = store.subscribe(() =>
 // store.dispatch(restockCake(4));
 
 // DISPATCH ACTION METHOD - 2
-// 1. BIND ACTION CREATORS WITH DISPATCH
+// 1. BIND ACTION CREATORS TO DISPATCH METHOD
 const actions = bindActionCreators(
 	{ orderCake, restockCake, orderIcecream, restockIcecream },
 	store.dispatch
 );
 
-// 2. CALL THE ACTION CREATOR FUNCTION USING ACTIONS
+// 2. CALL THE ACTION CREATOR BOUND WITH DISPATCH METHOD USING ACTIONS
 actions.orderCake();
 actions.orderCake();
 actions.orderCake(5);
