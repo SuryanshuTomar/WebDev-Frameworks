@@ -32,14 +32,18 @@ const cakeSlice = createSlice({
 	reducers: {
 		// cakeOrdered is the action we have defined and
 		// cakeSlice will create an action creator using this.
-		cakeOrdered: (state, action) => {
+		cakeOrder: (state, action) => {
 			if (!action.payload) {
 				state.noOfCakes -= 1;
 				return;
 			}
 			state.noOfCakes -= action.payload;
 		},
-		cakeRestocked: (state, action) => {
+		cakeRestock: (state, action) => {
+			if (!action.payload) {
+				state.noOfCakes += 1;
+				return;
+			}
 			state.noOfCakes += action.payload;
 		},
 	},
