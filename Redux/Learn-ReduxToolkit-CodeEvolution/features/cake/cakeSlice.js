@@ -41,7 +41,7 @@ const cakeSlice = createSlice({
 	},
 });
 
-// exporting the reducer and action creator
+// EXPORTING THE MAIN REDUCER AND ACTION CREATOR
 module.exports = cakeSlice.reducer; // default export
 module.exports = { cakeActions: cakeSlice.actions }; // named export
 // module.exports.cakeActions = cakeSlice.actions; // named export
