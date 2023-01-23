@@ -22,3 +22,5 @@
 //    2. Handles the most common use cases.
 //    3. Includes some of the useful utilties.
 
+// -> NPM Command - 
+// npm install @reduxjs/toolkit
