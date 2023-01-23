@@ -33,9 +33,13 @@ const cakeSlice = createSlice({
 		// cakeOrdered is the action we have defined and
 		// cakeSlice will create an action creator using this.
 		cakeOrdered: (state, action) => {
+			if (!action.payload) {
+				state.noOfCakes -= 1;
+				return;
+			}
 			state.noOfCakes -= action.payload;
 		},
-		restocked: (state, action) => {
+		cakeRestocked: (state, action) => {
 			state.noOfCakes += action.payload;
 		},
 	},
@@ -43,5 +47,4 @@ const cakeSlice = createSlice({
 
 // EXPORTING THE MAIN REDUCER AND ACTION CREATOR
 module.exports = cakeSlice.reducer; // default export
-module.exports = { cakeActions: cakeSlice.actions }; // named export
-// module.exports.cakeActions = cakeSlice.actions; // named export
+module.exports.cakeActions = cakeSlice.actions; // named export
