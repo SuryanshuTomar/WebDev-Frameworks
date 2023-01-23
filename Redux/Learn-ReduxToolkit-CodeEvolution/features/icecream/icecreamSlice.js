@@ -26,6 +26,11 @@ const icecreamSlice = createSlice({
 			state.noOfIcecreams += action.payload;
 		},
 	},
+	extraReducers: {
+		["cakeSlice/cakeOrder"]: (state) => {
+			state.noOfIcecreams--;
+		},
+	},
 });
 
 // EXPORTING THE MAIN REDUCER AND ACTION CREATOR
