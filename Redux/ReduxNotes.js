@@ -4,6 +4,9 @@
 // - It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test.
 // - We can use Redux together with React, or with any other view library. It is tiny (2kB, including dependencies), but has a large ecosystem of addons available.
 
+// - NPM Command - 
+// npm install redux
+
 // - Three Core Concepts of Redux -
 // 1. Store - It holds the state of our application. i.e - Cake Shop.
 // 2. Action - It describes what will happen in the application. i.e - Cake Ordering.
