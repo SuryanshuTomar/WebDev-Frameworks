@@ -3,6 +3,7 @@ const configureStore = require("@reduxjs/toolkit").configureStore;
 
 // 2. IMPORT FEATURE'S/SLICE'S REDUCERS
 const cakeReducer = require("../features/cake/cakeSlice");
+const icecreamReducer = require("../features/icecream/icecreamSlice");
 
 // 2. CREATE THE STORE
 // - To create a store we need to invoke configureStore() method from the redux-toolkit package.
@@ -13,6 +14,7 @@ const cakeReducer = require("../features/cake/cakeSlice");
 const store = configureStore({
 	reducer: {
 		cake: cakeReducer,
+		icecream: icecreamReducer,
 	},
 });
 
