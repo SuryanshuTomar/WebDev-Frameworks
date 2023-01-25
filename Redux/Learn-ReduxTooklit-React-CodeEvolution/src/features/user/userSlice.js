@@ -4,7 +4,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // 6. IMPORT AXIOS
-const axios = require("axios");
+import axios from "axios";
 
 // 3. INITIAL STATE FOR THE USER SLICE
 const initialState = {
