@@ -22,7 +22,7 @@ const initialState = {
 const fetchUsers = createAsyncThunk("userSlice/fetchUsers", () => {
 	return axios
 		.get("https://jsonplaceholder.typicode.com/users")
-		.then((response) => response.data.map((user) => user.id));
+		.then((response) => response.data);
 	// .catch((error) => console.log(error)); // No need for catch statement
 	// as the error handling is done by the createAsyncThunk middleware itself.
 });
