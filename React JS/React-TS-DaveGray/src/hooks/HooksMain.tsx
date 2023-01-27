@@ -7,6 +7,7 @@ import {
 	MouseEvent,
 	KeyboardEvent,
 } from "react";
+import Counter from "./UseReducer/Counter";
 
 type User = {
 	id: number;
@@ -58,6 +59,11 @@ const HooksMain = () => {
 				Fib of {myNum} is {result}
 			</h4>
 			<input type="text" ref={inputRef} />
+			<br /> <br />
+			<hr />
+			<br />
+			{/* UseReducer Hook */}
+			<Counter>{(num: number) => <>Current Count: {num}</>}</Counter>
 		</div>
 	);
 };
