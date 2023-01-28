@@ -4,6 +4,7 @@ import Counter from "./components/Counter";
 import { Heading } from "./components/Heading";
 import List from "./components/List";
 import { Section } from "./components/Section";
+import { CounterContextProvider, initState } from "./context/CounterContext";
 import HooksMain from "./hooks/HooksMain";
 
 function App() {
@@ -20,7 +21,14 @@ function App() {
 			/> */}
 
 			{/* Hooks */}
-			<HooksMain />
+			<>
+				<CounterContextProvider
+					count={initState.count}
+					text={initState.text}
+				>
+					<HooksMain />
+				</CounterContextProvider>
+			</>
 		</div>
 	);
 }
