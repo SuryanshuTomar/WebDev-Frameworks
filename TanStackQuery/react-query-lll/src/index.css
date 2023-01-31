@@ -8,7 +8,7 @@
 
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+	background-color: #333;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -20,7 +20,7 @@
 body {
 	font-family: "Nunito", sans-serif;
 	font-size: 1.5rem;
-	color: #ccc;
+	color: #ddd;
 }
 
 input[type="text"],
@@ -31,14 +31,14 @@ button {
 main {
 	margin: auto;
 	max-width: 600px;
-	background-color: #f8fafc;
+	background-color: #222;
 	padding: 1rem 2rem;
 	border-radius: 15px;
-	box-shadow: 2px 2px 5px #333;
+	box-shadow: 2px 2px 5px #ccc;
 }
 
 h1 {
-	margin: 0.5rem 0;
+	margin: 1rem 0;
 }
 
 form,
@@ -47,8 +47,8 @@ article {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #f8fafc;
-	border: 1px solid #18181b;
+	background-color: #222;
+	border: 0.5px solid #555;
 }
 
 .todo {
@@ -72,7 +72,7 @@ button {
 }
 
 .trash {
-	background-color: #f8fafc;
+	background-color: #333;
 	color: #ef4444;
 }
 
@@ -86,7 +86,7 @@ form {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border: 1px solid #18181b;
+	border: 1px solid #555;
 	margin-bottom: 1rem;
 }
 
