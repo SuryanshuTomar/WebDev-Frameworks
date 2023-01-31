@@ -3,6 +3,10 @@ import Basics from "./components/Basics/Basics";
 import MainQuery from "./components/UseQuery/MainQuery";
 import MainMutation from "./components/UseMutation/MainMutation";
 
+// IMPORTANT - 
+// https://tanstack.com/query/latest/docs/react/guides/does-this-replace-client-state
+// https://tanstack.com/query/latest
+
 const App = () => {
 	return (
 		<div>
