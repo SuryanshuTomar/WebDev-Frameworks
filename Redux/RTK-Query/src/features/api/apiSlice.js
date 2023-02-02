@@ -3,9 +3,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
 	reducerPath: "api", // directory name where this apiSlice is located in folder structure
 	baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3500" }), // baseURL
+	tagTypes: ["Todos"], // queryKey or tagTypes
 	endpoints: (builder) => ({
 		getTodos: builder.query({
 			query: () => "/todos",
+			providesTags: ["Todos"],
 		}),
 		addTodo: builder.mutation({
 			query: (todo) => {
@@ -15,6 +17,7 @@ export const apiSlice = createApi({
 					body: todo,
 				};
 			},
+			invalidatesTags: ["Todos"],
 		}),
 		updateTodo: builder.mutation({
 			query: (todo) => {
@@ -24,6 +27,7 @@ export const apiSlice = createApi({
 					body: todo,
 				};
 			},
+			invalidatesTags: ["Todos"],
 		}),
 		deleteTodo: builder.mutation({
 			query: ({ id }) => ({
@@ -31,6 +35,7 @@ export const apiSlice = createApi({
 				method: "DELETE",
 				body: id,
 			}),
+			invalidatesTags: ["Todos"],
 		}),
 	}),
 });
