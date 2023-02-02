@@ -63,3 +63,168 @@
 // const actions = bindActionCreators({actionCreatorFn1, actionCreatorFn2}, store.disptach).
 // actions.actionCreatorFn1()
 // actions.actionCreatorFn2()
+
+// ------------------------------------------------------------------------------------
+// => IMPORTANT  -
+
+// 1. We can use Selector Function to for useSelector Hook to return the state from the store.
+// Examples -
+// selectAllPosts selector for useSelector hook
+// export const selectAllPosts = (state) => state.posts.posts;
+
+// getCount selector for useSelector hook
+// export const getCount = (state) => state.posts.count;
+
+// useSelector selector for useSelector hook
+// export const getPostsStatus = (state) => state.posts.status;
+
+// getPostsError selector for useSelector hook
+// export const getPostsError = (state) => state.posts.error;
+
+// getPostsError selector for useSelector hook
+// export const getPostById = (state, postId) =>
+// state.posts.posts.find((post) => post.id === postId);
+
+// 2. useSelector() hook will run every time an action is dispatched and it forces the useSelector to run again and it forces the component to re-render If a reference value is returned. So, if we somehow returning a new value to the useSelector hook then it will re-render the component tree. And we can fix this by creating a memoised selector using a createSelector function from @reduxjs/toolkit.
+// creating this selector
+// createSelector([fn1, fn2.....], cbFn) -
+// The first argument is a dependency array that takes one or more selector functions whose return values should be the same as the values passed to the selector CbFn in the second parameter of the createSelector method.
+// The second argument is a callBackFunction which will run when we call our selectorFunction that is created from the createSelector method. And this the function that will be run when we call our selectorFuntion(so basically this cbFN is our selector function in which we can put our code into.)
+// So, if the value that are returned by the functions that are in the dependency array changes  then the useSelector hook will going to run our selector function otherwise not. And this how our selector function will get memoised
+// export const selectPostByUser = createSelector(
+// 	[selectAllPosts, (state, userId) => userId],
+// 	(posts, userId) => posts.filter((post) => post.userId === userId)
+// );
+
+// 3. Redux toolkit adds an unwrap() function to the returned promise and then that returns a new promise that either has the action payload or it throws an error if it's the rejected action so that lets us use this try-catch logic here so it will throw an error
+// try {
+// 	dispatch(addNewPost({ title, body: content, userId })).unwrap();
+// } catch (error) {
+// 	console.error("Failed to save the Post : ", error);
+// } finally {
+// 	setAddRequestStatus("idle");
+// }
+
+// 4. CreateSlice Object Structure Example -
+// const postsSlice = createSlice({
+// 	name: "posts",
+// 	initialState,
+// 	reducers: {
+// 		postAdded: {
+// 			// seprately defining the reducer method and the prepare method so that we can
+// 			// abstract the structure of the state from the main UI component and directly
+// 			// provide the values to the reducer.
+// 			// the prepare method will take the states content and return the action payload
+// 			// as it needs to be formatted and then it will be passed to the reducer
+// 			prepare: (title, content, userId) => {
+// 				return {
+// 					payload: {
+// 						id: nanoid(),
+// 						title,
+// 						content,
+// 						userId,
+// 						date: new Date().toISOString(),
+// 						reactions: {
+// 							thumbsUp: 0,
+// 							wow: 0,
+// 							heart: 0,
+// 							rocket: 0,
+// 							coffee: 0,
+// 						},
+// 					},
+// 				};
+// 			},
+// 			reducer: (state, action) => {
+// 				state.posts.push(action.payload);
+// 				// directly mutating the state because immerjs will handle it.
+// 			},
+// 		},
+// 		reactionAdded: (state, action) => {
+// 			const { postId, reaction } = action.payload;
+// 			const existingPost = state.posts.find((post) => post.id === postId);
+// 			if (existingPost) {
+// 				existingPost.reactions[reaction]++;
+// 			}
+// 		},
+// 		increaseCount(state, action) {
+// 			state.count += 1;
+// 		},
+// 	},
+// 	extraReducers: (builder) => {
+// 		builder
+// 			.addCase(fetchPosts.pending, (state, action) => {
+// 				state.status = "loading";
+// 			})
+// 			.addCase(fetchPosts.fulfilled, (state, action) => {
+// 				state.status = "succeeded";
+
+// 				// Adding date and reactions
+// 				let min = 1;
+// 				const loadedPosts = action.payload.map((post) => {
+// 					post.date = sub(new Date(), { minutes: min++ }).toISOString();
+// 					post.reactions = {
+// 						thumbsUp: 0,
+// 						wow: 0,
+// 						heart: 0,
+// 						rocket: 0,
+// 						coffee: 0,
+// 					};
+// 					return post;
+// 				});
+
+// 				// Add any fetched posts to the array
+// 				state.posts = state.posts.concat(loadedPosts);
+// 			})
+// 			.addCase(fetchPosts.rejected, (state, action) => {
+// 				state.status = "failed";
+// 				state.error = action.error.message;
+// 			})
+// 			.addCase(addNewPost.fulfilled, (state, action) => {
+// 				action.payload.userId = Number(action.payload.userId);
+// 				action.payload.date = new Date().toISOString();
+// 				action.payload.reactions = {
+// 					thumbsUp: 0,
+// 					wow: 0,
+// 					heart: 0,
+// 					rocket: 0,
+// 					coffee: 0,
+// 				};
+// 				// console.log(action.payload);
+// 				state.posts.push(action.payload); // directly mutating the state
+// 			})
+// 			.addCase(updatePost.fulfilled, (state, action) => {
+// 				if (!action.payload?.id) {
+// 					console.log("Update could not complete !");
+// 					console.log(action.payload);
+// 					return;
+// 				}
+
+// 				const { id } = action.payload;
+// 				action.payload.data = new Date().toISOString();
+// 				const posts = state.posts.filter((post) => post.id !== id);
+// 				state.posts = [...posts, action.payload];
+// 			})
+// 			.addCase(updatePost.rejected, (state, action) => {
+// 				state.status = "failed";
+// 				state.error = action.error.message;
+// 			})
+// 			.addCase(deletePost.fulfilled, (state, action) => {
+// 				if (!action.payload?.id) {
+// 					console.log("Delete could not complete !");
+// 					console.log(action.payload);
+// 					return;
+// 				}
+
+// 				const { id } = action.payload;
+// 				const posts = state.posts.filter((post) => post.id !== id);
+// 				state.posts = posts;
+// 			})
+// 			.addCase(deletePost.rejected, (state, action) => {
+// 				state.status = "failed";
+// 				state.error = action.error.message;
+// 			});
+// 	},
+// });
+
+// 5. Useful Snipped we can use -
+// const canSave = [title, content, userId].every(Boolean) && requestStatus === "idle";
