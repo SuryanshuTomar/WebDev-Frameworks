@@ -88,10 +88,16 @@
 // 2. useSelector() hook will run every time an action is dispatched and it forces the useSelector to run again and it forces the component to re-render If a reference value is returned. So, if we somehow returning a new value to the useSelector hook then it will re-render the component tree. And we can fix this by creating a memoised selector using a createSelector function from @reduxjs/toolkit.
 // creating this selector
 // createSelector([fn1, fn2.....], cbFn) -
-// The first argument is a dependency array that takes one or more selector functions whose return values should be the same as the values passed to the selector CbFn in the second parameter of the createSelector method.
-// The second argument is a callBackFunction which will run when we call our selectorFunction that is created from the createSelector method. And this the function that will be run when we call our selectorFuntion(so basically this cbFN is our selector function in which we can put our code into.)
+// The first argument is a dependency array that takes one or more selector functions whose return values will be passed as a parameter to the cbFn which is a second parameter of the createSelector and createDraftSafeSelector Method.
+// The second parameter of createSelector and createDraftSafeSelector Method is a callBackFunction which will run if the return value of the selectors functions in the dependency array changes when we call our selectorFunction that is created from the createSelector method. And then this cb selector function will run when we call our selectorFuntion(so basically this cbFN is our selector function in which we can put our code into.)
 // So, if the value that are returned by the functions that are in the dependency array changes  then the useSelector hook will going to run our selector function otherwise not. And this how our selector function will get memoised
 // export const selectPostByUser = createSelector(
+// 	[selectAllPosts, (state, userId) => userId],
+// 	(posts, userId) => posts.filter((post) => post.userId === userId)
+// );
+
+// More safe option -
+// export const selectPostByUser = createDraftSafeSelector(
 // 	[selectAllPosts, (state, userId) => userId],
 // 	(posts, userId) => posts.filter((post) => post.userId === userId)
 // );
