@@ -4,9 +4,8 @@ import { TextField, Paper, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import {
-	getStudent,
-	clearStudent,
 	updateStudent,
+	studentSelector,
 } from "../../redux/features/studentSlice";
 
 const EditStudent = () => {
@@ -23,13 +22,9 @@ const EditStudent = () => {
 	const params = useParams();
 	let history = useHistory();
 	const dispatch = useDispatch();
-	const student = useSelector((state) => state.student.student);
-	useEffect(() => {
-		dispatch(getStudent(params.id));
-		return () => {
-			dispatch(clearStudent());
-		};
-	}, [dispatch, params.id]);
+	const student = useSelector((state) =>
+		studentSelector.selectById(state, params.id)
+	);
 
 	useEffect(() => {
 		reset(student);

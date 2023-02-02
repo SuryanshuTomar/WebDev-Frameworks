@@ -1,19 +1,15 @@
-import { useEffect } from "react";
 import { Paper, Typography } from "@material-ui/core";
-import { getStudent, clearStudent } from "../../redux/features/studentSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { studentSelector } from "../../redux/features/studentSlice";
+
 const Student = () => {
 	const params = useParams();
-	const dispatch = useDispatch();
 
-	const student = useSelector((state) => state.student.student);
-	useEffect(() => {
-		dispatch(getStudent(params.id));
-		return () => {
-			dispatch(clearStudent());
-		};
-	}, [dispatch, params.id]);
+	const student = useSelector((state) =>
+		studentSelector.selectById(state, params.id)
+	);
+
 	return (
 		<Paper>
 			<Typography variant="h2" gutterBottom>
