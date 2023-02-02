@@ -7,8 +7,38 @@ export const apiSlice = createApi({
 		getTodos: builder.query({
 			query: () => "/todos",
 		}),
+		addTodo: builder.mutation({
+			query: (todo) => {
+				return {
+					url: "/todos",
+					method: "POST",
+					body: todo,
+				};
+			},
+		}),
+		updateTodo: builder.mutation({
+			query: (todo) => {
+				return {
+					url: `todos/${todo.id}`,
+					method: "PATCH",
+					body: todo,
+				};
+			},
+		}),
+		deleteTodo: builder.mutation({
+			query: ({ id }) => ({
+				url: `todos/${id}`,
+				method: "DELETE",
+				body: id,
+			}),
+		}),
 	}),
 });
 
 // createApi will return a custom hook for the endpoints based on the endpoints functions we have defined in the endpoints methods
-export const { useGetTodosQuery } = apiSlice;
+export const {
+	useGetTodosQuery,
+	useAddTodoMutation,
+	useUpdateTodoMutation,
+	useDeleteTodoMutation,
+} = apiSlice;
