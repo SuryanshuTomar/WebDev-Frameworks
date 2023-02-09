@@ -15,6 +15,9 @@ export const contactsApi = createApi({
 					),
 				providesTags: ["contacts"],
 			}),
+			getContact: builder.query<Contact, String>({
+				query: (id) => `/contacts/${id}`,
+			}),
 		};
 	},
 });
@@ -22,4 +25,4 @@ export const contactsApi = createApi({
 // export reducer
 export default contactsApi.reducer;
 
-export const { useGetContactsQuery } = contactsApi;
+export const { useGetContactsQuery, useGetContactQuery } = contactsApi;
