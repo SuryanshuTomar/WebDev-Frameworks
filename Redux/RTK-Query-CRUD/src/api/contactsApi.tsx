@@ -18,6 +18,31 @@ export const contactsApi = createApi({
 			getContact: builder.query<Contact, String>({
 				query: (id) => `/contacts/${id}`,
 			}),
+			addContact: builder.mutation<void, Contact>({
+				query: (contact) => ({
+					url: "/contacts",
+					method: "POST",
+					body: contact,
+				}),
+				invalidatesTags: ["contacts"],
+			}),
+			updateContact: builder.mutation<void, Contact>({
+				query: ({ id, ...contact }) => ({
+					url: `/contacts/${id}`,
+					method: "PUT",
+					body: contact,
+				}),
+				invalidatesTags: ["contacts"],
+			}),
+			deleteContact: builder.mutation<void, string>({
+				query: (id) => {
+					return {
+						url: `/contacts/${id}`,
+						method: "DELETE",
+					};
+				},
+				invalidatesTags: ["contacts"],
+			}),
 		};
 	},
 });
@@ -25,4 +50,10 @@ export const contactsApi = createApi({
 // export reducer
 export default contactsApi.reducer;
 
-export const { useGetContactsQuery, useGetContactQuery } = contactsApi;
+export const {
+	useGetContactsQuery,
+	useGetContactQuery,
+	useAddContactMutation,
+	useUpdateContactMutation,
+	useDeleteContactMutation,
+} = contactsApi;
