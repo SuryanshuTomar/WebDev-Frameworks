@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body className={montserrat.className}>
+			<body className={`${montserrat.className} mx-32 my-4`}>
 				<nav>
 					<br />
 					<h1
@@ -27,9 +27,9 @@ export default function RootLayout({ children }) {
 							textAlign: "center",
 							color: "black",
 						}}
-						className={inter.className}
+						className={`${inter.className} font-extrabold text-2xl my-8`}
 					>
-						MOVIE APP
+						The Next Movie App
 					</h1>
 					<br />
 				</nav>
