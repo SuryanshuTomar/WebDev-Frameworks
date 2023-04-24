@@ -5,13 +5,16 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
 	title: "Next Matrix",
-	description: "Generated using Next 13",
+	description: "Web Dev Tutorials",
+	keywords:
+		"Web development, web design, javascript, html, css, nextjs, next, js, react, reactjs",
 };
 
 export default function RootLayout({ children }) {
+	console.log(children);
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={`${inter.className} p-2`}>{children}</body>
 		</html>
 	);
 }
