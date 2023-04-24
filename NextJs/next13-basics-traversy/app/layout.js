@@ -1,7 +1,11 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+	weight: ["400", "700"],
+	style: ["italic", "normal"],
+	subsets: ["latin"],
+});
 
 export const metadata = {
 	title: "Next Matrix",
@@ -14,7 +18,9 @@ export default function RootLayout({ children }) {
 	console.log(children);
 	return (
 		<html lang="en">
-			<body className={`${inter.className} p-2`}>{children}</body>
+			<body className={`${poppins.className} p-2`}>
+				<main className="container">{children}</main>
+			</body>
 		</html>
 	);
 }
