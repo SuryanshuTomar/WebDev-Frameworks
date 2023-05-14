@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postAdded } from "./postSlice";
+import { addNewPost } from "./postSlice";
 import { selectAllUsers } from "../users/userSlice";
 
 const AddPostForm = () => {
@@ -9,14 +9,16 @@ const AddPostForm = () => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [userId, setUserId] = useState("");
+	const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
 	const onTitleChanged = (e) => setTitle(e.target.value);
 	const onContentChanged = (e) => setContent(e.target.value);
 	const onAuthorChanged = (e) => setUserId(e.target.value);
 
-	const users = useSelector(selectAllUsers);
+	const canSave =
+		[title, content, userId].every(Boolean) && addRequestStatus === "idle";
 
-	const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
+	const users = useSelector(selectAllUsers);
 
 	const usersOptions = users.map((user) => (
 		<option key={user.id} value={user.id}>
@@ -25,11 +27,29 @@ const AddPostForm = () => {
 	));
 
 	const onSavePostClicked = () => {
-		if (title && content) {
-			// in postAdded action creator, the first argument will be passed as feature state and second will be the action object in which, whatever we passes as argument in here will be attached to action object as payload property
-			dispatch(postAdded(title, content, userId));
-			setTitle("");
-			setContent("");
+		// if (title && content) {
+		// 	// in postAdded action creator, the first argument will be passed as feature state and second will be the action object in which, whatever we passes as argument in here will be attached to action object as payload property
+		// 	dispatch(postAdded(title, content, userId));
+		// 	setTitle("");
+		// 	setContent("");
+		//    setUserId("");
+		// }
+
+		// new code
+		if (canSave) {
+			try {
+				setAddRequestStatus("pending");
+				dispatch(addNewPost({ title, body: content, userId })).unwrap();
+				// redux toolkit adds an unwrap() function to the returned promise and then that promises returns a new promises that either has the action.payload or it throws an error if its returns a "rejected" action, so that we can handle it here in case any error is returned using the try-catch block
+
+				setTitle("");
+				setContent("");
+				setUserId("");
+			} catch (error) {
+				console.error("Failed to save the post", error);
+			} finally {
+				setAddRequestStatus("idle");
+			}
 		}
 	};
 

@@ -1,11 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // initial state
-const initialState = [
-	{ id: "0", name: "Dude Lebowski" },
-	{ id: "1", name: "Neil Young" },
-	{ id: "2", name: "Dave Gray" },
-];
+// const initialState = [
+// 	{ id: "0", name: "Dude Lebowski" },
+// 	{ id: "1", name: "Neil Young" },
+// 	{ id: "2", name: "Dave Gray" },
+// ];
+const initialState = [];
+
+const USERS_URL = "https://jsonplaceholder.typicode.com/users";
+
+export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
+	const response = await axios.get(USERS_URL);
+	return response.data;
+});
 
 // Users feature slice
 export const userSlice = createSlice({
@@ -18,6 +27,13 @@ export const userSlice = createSlice({
 	// reducers for the userSlice feature
 	reducers: {
 		something: () => {},
+	},
+	extraReducers(builder) {
+		builder.addCase(fetchUsers.fulfilled, (state, action) => {
+			// here we are not updating the state but instead returning the action.payload
+			// This means the payload will replace the entire slice state of users
+			return action.payload;
+		});
 	},
 });
 
