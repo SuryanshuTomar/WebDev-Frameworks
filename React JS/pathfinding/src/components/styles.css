@@ -1,0 +1,19 @@
+.grid-container {
+	display: flex;
+}
+
+.grid-row {
+	display: flex;
+	flex-direction: column;
+}
+
+.grid-item {
+	height: 25px;
+	width: 25px;
+	background-color: #ddd;
+	text-align: center;
+}
+
+.obstacle {
+	background-color: #333;
+}

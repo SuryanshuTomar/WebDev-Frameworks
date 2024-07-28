@@ -1,0 +1,15 @@
+.layoutContainer {
+	display: flex;
+}
+
+.leftContainer {
+	background-color: orange;
+	color: black;
+	text-align: center;
+}
+
+.rightContainer {
+	background-color: cyan;
+	color: black;
+	text-align: center;
+}
