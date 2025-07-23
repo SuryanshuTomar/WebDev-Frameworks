@@ -1,0 +1,12 @@
+*.env
+*.class
+*.iml
+*.log
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.tmp
+*.class
+*.jar
+*.war

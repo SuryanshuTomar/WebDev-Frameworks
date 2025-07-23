@@ -1,4 +1,4 @@
-import MealItem from "../MealsItem";
+import MealItem from "../MealItem";
 import classes from "./index.module.css";
 
 function MealsGrid(props) {
