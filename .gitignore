@@ -10,3 +10,6 @@
 *.class
 *.jar
 *.war
+
+# bazel
+bazel-*
